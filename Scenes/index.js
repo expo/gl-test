@@ -12,4 +12,4 @@ export default {
   THREEPerfScene: require('./THREEPerfScene').default,
   THREEBasicTouchScene: require('./THREEBasicTouchScene').default,
   Conformance: require('./Conformance').default,
-}
+};
