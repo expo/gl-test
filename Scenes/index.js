@@ -11,4 +11,5 @@ export default {
   THREEOBJScene: require('./THREEOBJScene').default,
   THREEPerfScene: require('./THREEPerfScene').default,
   THREEBasicTouchScene: require('./THREEBasicTouchScene').default,
+  Conformance: require('./Conformance').default,
 }

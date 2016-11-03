@@ -73,10 +73,18 @@ const tests = filter([
 ]);
 
 
-// `GLTestReporter` expects a map of the form `{ [name]: test ... }`
-export default (...viewProps) => (
-  <GLTestReporter
-    {...viewProps}
-    testCases={Object.assign(...tests.map((test => ({ [test.name]: test }))))}
-  />
-);
+export default class Conformance extends React.Component {
+  static meta = {
+    description: `Khronos' WebGL Spec Conformance Test`,
+  };
+
+  render() {
+    // `GLTestReporter` expects a map of the form `{ [name]: test ... }`
+    return (
+      <GLTestReporter
+        {...this.props}
+        testCases={Object.assign(...tests.map((test => ({ [test.name]: test }))))}
+      />
+    );
+  }
+}
