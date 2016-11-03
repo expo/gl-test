@@ -1,17 +1,13 @@
 Testing OpenGL on Exponent!
+---------------------------
 
-Change the component instantiated in `App` in `index.js` to try different
-scenes. The scenes are:
+`Scenes/` shows a few different scenes that use OpenGL rendering in Exponent.
+The REGL* scenes use http://regl.party/ and the THREE* scenes use
+https://threejs.org/, both of which work directly on Exponent with their WebGL
+rendering. Not all features of WebGL are implemented yet.
 
-- BasicScene: A very basic direct WebGL code example
-- BasicTextureScene: Direct WebGL code that loads a texture
-
-- MultiBasicScene: Many `GLView`s at once
-
-- REGL*: Based on the examples at http://regl.party/examples
-
-- THREE*: Based on the examples at https://threejs.org/examples/
-
-- Conformance: Testing conformance against Khronos' conformance tests
-    (https://www.khronos.org/webgl/wiki/Testing/Conformance)
+`Scenes/Conformance/` includes code for automated testing of conformance with
+Khronos' WebGL specification, based on
+https://www.khronos.org/webgl/wiki/Testing/Conformance, using
+https://github.com/stackgl/gl-conformance to provide DOM-independent code.
 
