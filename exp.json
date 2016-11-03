@@ -1,0 +1,11 @@
+{
+  "name": "gl-test",
+  "iconUrl": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
+  "description": "Exponent OpenGL Test",
+  "slug": "gl-test",
+  "version": "1.0.0",
+  "sdkVersion": "11.0.0",
+  "packagerOpts": {
+    "assetExts": ["ttf", "mp4", "obj"]
+  }
+}
