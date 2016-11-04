@@ -31,10 +31,19 @@ const tests = filter([
   _(require('gl-conformance/node-test/more_conformance_constants')),
   _(require('gl-conformance/node-test/more_conformance_getContext')),
   _(require('gl-conformance/node-test/more_conformance_methods')),
+  _(require('gl-conformance/node-test/more_conformance_webGLArrays'), [
+    // TODO(nikki, sdk12): Figure this out...
+    198, 200, 201, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/sdk/tests/conformance/more/conformance/webGLArrays.html#L157-L16
+  ]),
   _(require('gl-conformance/node-test/more_functions_bindBuffer')),
   _(require('gl-conformance/node-test/more_functions_bufferData')),
   _(require('gl-conformance/node-test/more_functions_bufferSubData')),
+  _(require('gl-conformance/node-test/more_functions_readPixels')),
   _(require('gl-conformance/node-test/more_functions_texImage2D')),
+  _(require('gl-conformance/node-test/more_functions_uniformMatrix')),
+  _(require('gl-conformance/node-test/more_functions_uniformf')),
+  _(require('gl-conformance/node-test/more_functions_uniformfArrayLen1')),
+  _(require('gl-conformance/node-test/more_functions_uniformi')),
   _(require('gl-conformance/node-test/more_functions_vertexAttrib')),
   _(require('gl-conformance/node-test/more_functions_vertexAttribPointer')),
 
@@ -51,18 +60,6 @@ const tests = filter([
 
 
   //// TODO
-
-  // TODO(nikki, sdk12): Implement custom renderbuffer on iOS for
-  //                     `gl.readPixels(...)` to work...
-  I_(require('gl-conformance/node-test/more_functions_readPixels')),
-  I_(require('gl-conformance/node-test/more_functions_uniformf')),
-  I_(require('gl-conformance/node-test/more_functions_uniformfArrayLen1')),
-  I_(require('gl-conformance/node-test/more_functions_uniformi')),
-  I_(require('gl-conformance/node-test/more_functions_uniformMatrix')),
-  I_(require('gl-conformance/node-test/more_conformance_webGLArrays'), [
-    // TODO(nikki, sdk12): Figure this out...
-    198, 200, 201, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/sdk/tests/conformance/more/conformance/webGLArrays.html#L157-L16
-  ]),
 
   // TODO(nikki, sdk12): Implement functions used in these...
   S_(require('gl-conformance/node-test/more_functions_isTests')),
