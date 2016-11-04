@@ -18,7 +18,7 @@ class GLRunTest extends React.Component {
     );
   }
 
-  _onContextCreate = async (gl) => {
+  _onContextCreate = (gl) => {
     const { testCase, testName, onDone } = this.props;
 
     // shim conformance suite methods for resize/destroy context
