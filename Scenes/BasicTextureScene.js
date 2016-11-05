@@ -111,8 +111,7 @@ export default class BasicScene extends React.Component {
         gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
         gl.useProgram(program);
         gl.enableVertexAttribArray(positionAttrib);
-        gl.vertexAttribPointer(positionAttrib, 2, gl.FLOAT,
-                               gl.FALSE, 0, 0);
+        gl.vertexAttribPointer(positionAttrib, 2, gl.FLOAT, false, 0, 0);
 
         // Buffer data and draw!
         const verts = new Float32Array([
