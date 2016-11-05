@@ -36,7 +36,7 @@ const tests = filter([
   _(require('@exponent/gl-conformance/node-test/more_conformance_methods')),
   _(require('@exponent/gl-conformance/node-test/more_conformance_webGLArrays'), [
     // TODO(nikki, sdk12): Figure this out...
-    198, 200, 201, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/sdk/tests/conformance/more/conformance/webGLArrays.html#L157-L16
+    198, 200, 201,
   ]),
 
   // more_functions
@@ -53,44 +53,40 @@ const tests = filter([
   _(require('@exponent/gl-conformance/node-test/more_functions_vertexAttribPointer')),
   _(require('@exponent/gl-conformance/node-test/more_functions_drawArrays'), [
     // `gl.drawArrays(...)` doesn't throw an error for bad arguments
-    14, 15, // https://github.com/KhronosGroup/WebGL/blob/18b5d44c5372dc36b78a2d229d3612bdce3aec9a/sdk/tests/conformance/more/functions/drawArrays.html#L92-L93
-    20, 21, // https://github.com/KhronosGroup/WebGL/blob/18b5d44c5372dc36b78a2d229d3612bdce3aec9a/sdk/tests/conformance/more/functions/drawArrays.html#L100-L101
+    14, 15, 20, 21,
   ]),
   _(require('@exponent/gl-conformance/node-test/more_functions_drawElements'), [
     // `gl.drawElements(...)` doesn't throw an error for bad arguments
-    14, 15, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/sdk/tests/conformance/more/functions/drawElements.html#L95-L98
-    20, 21, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/sdk/tests/conformance/more/functions/drawElements.html#L106-L109
+    14, 15, 20, 21,
   ]),
 
   // buffers
   _(require('@exponent/gl-conformance/node-test/buffers_buffer-bind-test'), [
     // No `gl.INVALID_OPERATION` when binding buffer to different target
-    4, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/sdk/tests/conformance/buffers/buffer-bind-test.html#L64
-    7, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/sdk/tests/conformance/buffers/buffer-bind-test.html#L75
+    4, 7,
   ]),
   _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer-delete')),
   _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer'), [
     // `null` data argument to `gl.bufferData(...)` is ok
-    7, // https://github.com/stackgl/gl-conformance/blob/cfb4649b21cd138c3a6870d4534422287e054d3f/conformance-suites/1.0.3/conformance/buffers/buffer-data-array-buffer.html#L65-L66
+    7,
   ]),
-  S_(require('@exponent/gl-conformance/node-test/buffers_element-array-buffer-delete-recreate')),
-  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-copies-indices')),
-  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-crash-with-buffer-sub-data')),
-  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-large-buffer')),
-  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-verifies-too-many-indices')),
-  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-with-resized-buffer')),
-  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation')),
+  _(require('@exponent/gl-conformance/node-test/buffers_element-array-buffer-delete-recreate')),
 
   // attribs
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-aliasing')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-matrix')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-disabled-vertex-attrib')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-enable-vertex-attrib')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-matrix-attributes')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-render')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-zero-issues')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib')),
-  S_(require('@exponent/gl-conformance/node-test/attribs_gl-vertexattribpointer-offsets')),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-aliasing')),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-matrix')),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-disabled-vertex-attrib'), [
+    // Needs a fresh context for the last test but we can't create fresh contexts within
+    // a test
+    16,
+  ]),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-enable-vertex-attrib'), [
+    // No error check for drawing with attrib without bound buffer
+    2,
+  ]),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-matrix-attributes')),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-zero-issues')),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-vertexattribpointer-offsets')),
   _(require('@exponent/gl-conformance/node-test/attribs_gl-vertexattribpointer'), [
     // No `gl.getError()` error on bad arguments
     2, 3, 4, 5, 13, 27, 53, 67, 93, 107, 133, 147, 173, 187, 213, 227, 253, 267,
@@ -122,12 +118,27 @@ const tests = filter([
 
   //// TODO
 
-  // TODO(nikki, sdk12): Implement functions used in these...
+  // Not sure why this fails
+  S_(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-render')),
+
+  // `gl.getVertexAttrib()` not yet implemented
+  S_(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib')),
+
+  // Unimplemented functions
   S_(require('@exponent/gl-conformance/node-test/more_functions_isTests')),
   S_(require('@exponent/gl-conformance/node-test/more_functions_texSubImage2D')),
   S_(require('@exponent/gl-conformance/node-test/more_functions_copyTexImage2D')),
   S_(require('@exponent/gl-conformance/node-test/more_functions_copyTexSubImage2D')),
   S_(require('@exponent/gl-conformance/node-test/more_functions_bindFramebufferLeaveNonZero')),
+
+  // No buffer index validation
+  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-copies-indices')),
+  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-crash-with-buffer-sub-data')),
+  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-large-buffer')),
+  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-verifies-too-many-indices')),
+  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-with-resized-buffer')),
+  S_(require('@exponent/gl-conformance/node-test/buffers_index-validation')),
+
 ]);
 
 
