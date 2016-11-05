@@ -3,6 +3,8 @@
 import React from 'react';
 import { Platform } from 'react-native';
 
+global.Buffer = require('buffer/').Buffer;
+
 import GLTestReporter from './GLTestReporter';
 
 
