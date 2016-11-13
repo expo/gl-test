@@ -21,14 +21,6 @@ class GLRunTest extends React.Component {
   _onContextCreate = (gl) => {
     const { testCase, testName, onDone } = this.props;
 
-    // shim conformance suite methods for resize/destroy context
-    if (!('resize' in gl)) {
-      gl.resize = function() {};
-    }
-    if (!('destroy' in gl)) {
-      gl.destroy = function() {};
-    }
-
     let testCounter = 0;
     let success = true;
 
@@ -85,7 +77,6 @@ class GLRunTest extends React.Component {
         },
       },
       createContext(width, height, options) {
-        gl.resize(width, height);
         return gl;
       },
     });
