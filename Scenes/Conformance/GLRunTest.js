@@ -26,8 +26,8 @@ class GLRunTest extends React.Component {
 
     const messages = [];
 
-    function log(message) {
-      messages.push(message);
+    function log(message, state) {
+      messages.push({ text: message, state });
       console.log(message);
     }
 
@@ -35,15 +35,15 @@ class GLRunTest extends React.Component {
 
     function pass(message) {
       testCounter += 1;
-      log(`pass ${testCounter} - ${message || 'pass'}`);
+      log(`pass ${testCounter} - ${message || 'pass'}`, 'success');
     }
 
     function fail(message) {
       testCounter += 1;
       if (testCase.skipChecks && testCase.skipChecks.includes(testCounter)) {
-        log(`diff ${testCounter} - ${message || 'fail'}`);
+        log(`diff ${testCounter} - ${message || 'fail'}`, 'success');
       } else {
-        log(`fail ${testCounter} - ${message || 'fail'}`);
+        log(`fail ${testCounter} - ${message || 'fail'}`, 'fail');
         success = false;
       }
     }

@@ -34,8 +34,6 @@ class GLTestReporter extends React.Component {
     const { testCases } = this.props;
     const { testLogs, currentTestId } = this.state;
 
-    const self = this;
-
     return (
       <View
         style={{
@@ -43,35 +41,30 @@ class GLTestReporter extends React.Component {
             position: 'absolute',
             left: 0, top: 0, right: 0, bottom: 0,
           }}>
-        <View
-          style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.9)',
-              height: Constants.statusBarHeight,
-            }}
-        />
         {
           testLogs.map(({ name, messages, state }, id) => (
             id === currentTestId ? (
               <GLRunTest
                 key={name}
-                style={{ width: 200, height: 200 }}
+                style={{ width: 50, height: 50 }}
                 testName={name}
                 testCase={testCases[name]}
-                onDone={function(result) {
-                    self._onTestFinish(result);
-                  }}
+                onDone={this._onTestFinish}
               />
             ) : null
           ))
         }
-        <ScrollView style={{ backgroundColor: 'transparent' }}>
+        <ScrollView style={{
+          padding: 10,
+          backgroundColor: 'transparent',
+        }}>
         {
           testLogs.map(({ name, messages, state }, id) => (
             <View key={name}>
               <Text style={{color: STATE_COLORS[state], fontSize: 24}}>
                 {`${name} - ${state}`}
               </Text>
-              {messages.map((message, id) =>
+              {messages.map(({ text, state }, id) =>
                 <View key={`${name}:${id}`}>
                   <Text
                     style={{
@@ -79,7 +72,7 @@ class GLTestReporter extends React.Component {
                       color: STATE_COLORS[state],
                       fontSize: 12,
                     }}>
-                    {message}
+                    {text}
                   </Text>
                 </View>
               )}
@@ -91,7 +84,7 @@ class GLTestReporter extends React.Component {
     );
   }
 
-  _onTestFinish({messages, success}) {
+  _onTestFinish = ({messages, success}) => {
     const { testLogs, currentTestId } = this.state;
     const nextLogs = testLogs.slice();
     nextLogs[currentTestId] = {
