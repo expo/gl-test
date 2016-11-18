@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import Scenes from './Scenes';
-import Styles from './Styles';
 
 class SceneScreen extends React.Component {
   static route = {
@@ -47,8 +46,12 @@ class SceneScreen extends React.Component {
     }
 
     return (
-      <View style={{flex: 1, backgroundColor: 'black'}}>
-        <SceneComponent style={Styles.container} />
+      <View style={{
+        ...this.props.route.getContentInsetsStyle(),
+        flex: 1,
+        backgroundColor: 'black',
+      }}>
+        <SceneComponent style={{ flex: 1 }} />
         <StatusBar barStyle="default" />
       </View>
     );
