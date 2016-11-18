@@ -30,48 +30,6 @@ const filter = (tests) => {
 const tests = filter([
   //// DONE
 
-  // more_conformance
-  _(require('@exponent/gl-conformance/node-test/more_conformance_constants')),
-  _(require('@exponent/gl-conformance/node-test/more_conformance_getContext')),
-  _(require('@exponent/gl-conformance/node-test/more_conformance_methods')),
-  _(require('@exponent/gl-conformance/node-test/more_conformance_webGLArrays'), [
-    // TODO(nikki, sdk12): Figure this out...
-    198, 200, 201,
-  ]),
-
-  // more_functions
-  _(require('@exponent/gl-conformance/node-test/more_functions_bindBuffer')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_bufferData')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_bufferSubData')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_readPixels')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_texImage2D')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_uniformMatrix')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_uniformf')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_uniformfArrayLen1')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_uniformi')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_vertexAttrib')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_vertexAttribPointer')),
-  _(require('@exponent/gl-conformance/node-test/more_functions_drawArrays'), [
-    // `gl.drawArrays(...)` doesn't throw an error for bad arguments
-    14, 15, 20, 21,
-  ]),
-  _(require('@exponent/gl-conformance/node-test/more_functions_drawElements'), [
-    // `gl.drawElements(...)` doesn't throw an error for bad arguments
-    14, 15, 20, 21,
-  ]),
-
-  // buffers
-  _(require('@exponent/gl-conformance/node-test/buffers_buffer-bind-test'), [
-    // No `gl.INVALID_OPERATION` when binding buffer to different target
-    4, 7,
-  ]),
-  _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer-delete')),
-  _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer'), [
-    // `null` data argument to `gl.bufferData(...)` is ok
-    7,
-  ]),
-  _(require('@exponent/gl-conformance/node-test/buffers_element-array-buffer-delete-recreate')),
-
   // attribs
   _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-aliasing')),
   _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-matrix')),
@@ -114,6 +72,77 @@ const tests = filter([
     753, 754, 755, 756, 757, 758, 759, 760, 761, 762, 763, 765, 766, 768, 770,
     771, 772, 773, 774, 775, 777, 778, 780,
   ]),
+
+  // buffers
+  _(require('@exponent/gl-conformance/node-test/buffers_buffer-bind-test'), [
+    // No `gl.INVALID_OPERATION` when binding buffer to different target
+    4, 7,
+  ]),
+  _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer-delete')),
+  _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer'), [
+    // `null` data argument to `gl.bufferData(...)` is ok
+    7,
+  ]),
+  _(require('@exponent/gl-conformance/node-test/buffers_element-array-buffer-delete-recreate')),
+
+  // context
+  _(require('@exponent/gl-conformance/node-test/context_constants-and-properties')),
+  _(require('@exponent/gl-conformance/node-test/context_methods'), [
+    // Extra method `gl.endFrameEXP()` exists
+    2, 3,
+  ]),
+
+  // program
+  _(require('@exponent/gl-conformance/node-test/programs_get-active-test'), [
+    // No `gl.getError()` error on bad arguments
+    10, 32,
+    // Needs a fresh context for these but we don't support making multiple contexts
+    // in one test
+    34, 35, 36, 37,
+  ]),
+  _(require('@exponent/gl-conformance/node-test/programs_gl-bind-attrib-location-long-names-test')),
+  _(require('@exponent/gl-conformance/node-test/programs_gl-bind-attrib-location-test')),
+  _(require('@exponent/gl-conformance/node-test/programs_gl-get-active-attribute')),
+  _(require('@exponent/gl-conformance/node-test/programs_gl-get-active-uniform'), [
+    // No `gl.getError()` error on bad arguments
+    60,
+  ]),
+  
+  _(require('@exponent/gl-conformance/node-test/programs_gl-shader-test'), [
+    // We can create GEOMETRY shaders... ¯\_(ツ)_/¯
+    2,
+  ]),
+
+  // more_conformance
+  _(require('@exponent/gl-conformance/node-test/more_conformance_constants')),
+  _(require('@exponent/gl-conformance/node-test/more_conformance_getContext')),
+  _(require('@exponent/gl-conformance/node-test/more_conformance_methods')),
+  _(require('@exponent/gl-conformance/node-test/more_conformance_webGLArrays'), [
+    // TODO(nikki, sdk12): Figure this out...
+    198, 200, 201,
+  ]),
+
+  // more_functions
+  _(require('@exponent/gl-conformance/node-test/more_functions_bindBuffer')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_bufferData')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_bufferSubData')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_readPixels')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_texImage2D')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_uniformMatrix')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_uniformf')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_uniformfArrayLen1')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_uniformi')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_vertexAttrib')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_vertexAttribPointer')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_drawArrays'), [
+    // `gl.drawArrays(...)` doesn't throw an error for bad arguments
+    14, 15, 20, 21,
+  ]),
+  _(require('@exponent/gl-conformance/node-test/more_functions_drawElements'), [
+    // `gl.drawElements(...)` doesn't throw an error for bad arguments
+    14, 15, 20, 21,
+  ]),
+
 
 
   //// TODO
