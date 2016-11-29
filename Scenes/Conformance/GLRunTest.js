@@ -19,6 +19,8 @@ class GLRunTest extends React.Component {
   }
 
   _onContextCreate = (gl) => {
+    // gl.enableLogging = true;
+
     const { testCase, testName, onDone } = this.props;
 
     let testCounter = 0;
