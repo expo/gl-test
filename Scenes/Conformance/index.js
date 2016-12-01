@@ -92,7 +92,7 @@ const tests = filter([
     2, 3,
   ]),
 
-  // program
+  // programs
   /* TODO(nikki): Crashes on Android */ S_(require('@exponent/gl-conformance/node-test/programs_get-active-test'), [
     // No `gl.getError()` error on bad arguments
     7, 8, 10, 29, 30, 32,
@@ -126,6 +126,36 @@ const tests = filter([
     54, 60,
   ]),
   _(require('@exponent/gl-conformance/node-test/programs_use-program-crash-with-discard-in-fragment-shader')),
+
+  // reading
+  // TODO(nikki): This only mostly pass...
+  _(require('@exponent/gl-conformance/node-test/reading_read-pixels-pack-alignment')),
+  _(require('@exponent/gl-conformance/node-test/reading_read-pixels-test')),
+
+  // rendering
+  _(require('@exponent/gl-conformance/node-test/rendering_culling')),
+  _(require('@exponent/gl-conformance/node-test/rendering_gl-clear')),
+  _(require('@exponent/gl-conformance/node-test/rendering_gl-drawarrays')),
+  _(require('@exponent/gl-conformance/node-test/rendering_gl-drawelements'), [
+    // Don't care about INVALID_ENUM for UNSIGNED_INT...
+    6
+  ]),
+  _(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-test')),
+  _(require('@exponent/gl-conformance/node-test/rendering_gl-viewport-test')),
+  _(require('@exponent/gl-conformance/node-test/rendering_line-loop-tri-fan')),
+  _(require('@exponent/gl-conformance/node-test/rendering_many-draw-calls')),
+  _(require('@exponent/gl-conformance/node-test/rendering_more-than-65536-indices')),
+  _(require('@exponent/gl-conformance/node-test/rendering_negative-one-index')),
+  _(require('@exponent/gl-conformance/node-test/rendering_point-no-attributes')),
+  _(require('@exponent/gl-conformance/node-test/rendering_point-size')),
+  _(require('@exponent/gl-conformance/node-test/rendering_point-with-gl-pointcoord-in-fragment-shader')),
+  _(require('@exponent/gl-conformance/node-test/rendering_polygon-offset')),
+  _(require('@exponent/gl-conformance/node-test/rendering_simple')),
+  _(require('@exponent/gl-conformance/node-test/rendering_triangle')),
+
+  O_(require('@exponent/gl-conformance/node-test/rendering_framebuffer-switch')),
+  O_(require('@exponent/gl-conformance/node-test/rendering_framebuffer-texture-switch')),
+  O_(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-fbo-test')),
 
   // more_conformance
   _(require('@exponent/gl-conformance/node-test/more_conformance_constants')),

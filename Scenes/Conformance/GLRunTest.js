@@ -21,6 +21,8 @@ class GLRunTest extends React.Component {
   _onContextCreate = (gl) => {
     // gl.enableLogging = true;
 
+    gl.resize = (w, h) => console.log('w, h', w, h);
+
     const { testCase, testName, onDone } = this.props;
 
     let testCounter = 0;
@@ -79,6 +81,7 @@ class GLRunTest extends React.Component {
         },
       },
       createContext(width, height, options) {
+        gl.resize(width, height);
         return gl;
       },
     });
