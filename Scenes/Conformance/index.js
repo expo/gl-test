@@ -152,10 +152,9 @@ const tests = filter([
   _(require('@exponent/gl-conformance/node-test/rendering_polygon-offset')),
   _(require('@exponent/gl-conformance/node-test/rendering_simple')),
   _(require('@exponent/gl-conformance/node-test/rendering_triangle')),
-
-  O_(require('@exponent/gl-conformance/node-test/rendering_framebuffer-switch')),
-  O_(require('@exponent/gl-conformance/node-test/rendering_framebuffer-texture-switch')),
-  O_(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-fbo-test')),
+  _(require('@exponent/gl-conformance/node-test/rendering_framebuffer-switch')),
+  _(require('@exponent/gl-conformance/node-test/rendering_framebuffer-texture-switch')),
+  _(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-fbo-test')),
 
   // more_conformance
   _(require('@exponent/gl-conformance/node-test/more_conformance_constants')),
