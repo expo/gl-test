@@ -46,7 +46,10 @@ class GLTestReporter extends React.Component {
             id === currentTestId ? (
               <GLRunTest
                 key={name}
-                style={{ width: 64, height: 64 }}
+                style={{
+                  width: testCases[name].width || 64,
+                  height: testCases[name].height || 64,
+                }}
                 testName={name}
                 testCase={testCases[name]}
                 onDone={this._onTestFinish}

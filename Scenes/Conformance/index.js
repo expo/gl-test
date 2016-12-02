@@ -16,7 +16,12 @@ import GLTestReporter from './GLTestReporter';
 // All forms take an additional array argument with indices of checks that are
 // ok to fail on due to expected non-conformance
 
-const _ = (test, skipChecks) => (test.skipChecks = skipChecks, test);
+const _ = (test, skipChecks, width, height) => (
+  test.skipChecks = skipChecks,
+  test.width = width,
+  test.height = height,
+  test
+);
 const S_ = (test, ...args) => (test.skip = true, _(test, ...args));
 const P_ = (test, pred, ...args) => (test.skip = !pred, _(test, ...args));
 const O_ = (test, ...args) => (test.only = true, _(test, ...args));
