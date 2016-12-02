@@ -156,6 +156,7 @@ const tests = filter([
   _(require('@exponent/gl-conformance/node-test/rendering_framebuffer-texture-switch')),
   _(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-fbo-test')),
 
+
   // more_conformance
   _(require('@exponent/gl-conformance/node-test/more_conformance_constants')),
   _(require('@exponent/gl-conformance/node-test/more_conformance_getContext')),
@@ -185,6 +186,7 @@ const tests = filter([
     // `gl.drawElements(...)` doesn't throw an error for bad arguments
     14, 15, 20, 21,
   ]),
+  _(require('@exponent/gl-conformance/node-test/more_functions_bindFramebufferLeaveNonZero')),
 
 
 
@@ -201,7 +203,6 @@ const tests = filter([
   S_(require('@exponent/gl-conformance/node-test/more_functions_texSubImage2D')),
   S_(require('@exponent/gl-conformance/node-test/more_functions_copyTexImage2D')),
   S_(require('@exponent/gl-conformance/node-test/more_functions_copyTexSubImage2D')),
-  S_(require('@exponent/gl-conformance/node-test/more_functions_bindFramebufferLeaveNonZero')),
 
   // No buffer index validation
   S_(require('@exponent/gl-conformance/node-test/buffers_index-validation-copies-indices')),
