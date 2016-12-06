@@ -135,26 +135,26 @@ const tests = (() => {
       60,
     ]),
     _(require('@exponent/gl-conformance/node-test/programs_gl-getshadersource'), [
-      // On iOS I get a newline addded at the end of the shader source... ¯\_(ツ)_/¯
+      // On iOS I get a newline addded at the end of the shader source ¯\_(ツ)_/¯
       1,
     ]),
     // TODO(nikki): Fails on Android
     S_(require('@exponent/gl-conformance/node-test/programs_gl-shader-test'), [
-      // We can create GEOMETRY shaders... ¯\_(ツ)_/¯
+      // We can create GEOMETRY shaders ¯\_(ツ)_/¯
       2,
     ]),
     _(require('@exponent/gl-conformance/node-test/programs_invalid-UTF-16')),
     _(require('@exponent/gl-conformance/node-test/programs_program-test'), [
-      // No error checking...
+      // No error checking
       4, 5, 6, 7, 33, 34, 35, 36, 37, 38,
-      // OpenGL ES on iOS seems to differ here, we'll just go with it...
+      // OpenGL ES on iOS seems to differ here, we'll just go with it
       54, 60,
     ]),
     _(require('@exponent/gl-conformance/node-test/programs_use-program-crash-with-discard-in-fragment-shader')),
   ])
 
   // reading
-  // TODO(nikki): This only mostly passes...
+  // TODO(nikki): This only mostly passes
   O$([
     _(require('@exponent/gl-conformance/node-test/reading_read-pixels-pack-alignment'), [
       // TODO(nikki): Figure out the issue here
@@ -174,7 +174,7 @@ const tests = (() => {
     _(require('@exponent/gl-conformance/node-test/rendering_gl-clear')),
     _(require('@exponent/gl-conformance/node-test/rendering_gl-drawarrays')),
     _(require('@exponent/gl-conformance/node-test/rendering_gl-drawelements'), [
-      // Don't care about INVALID_ENUM for UNSIGNED_INT...
+      // Don't care about INVALID_ENUM for UNSIGNED_INT
       6
     ]),
     _(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-test')),
@@ -197,7 +197,7 @@ const tests = (() => {
   // textures
   $([
     _(require('@exponent/gl-conformance/node-test/textures_copy-tex-image-2d-formats'), [
-      // Don't care about error checking...
+      // Don't care about error checking
       42, 46, 50,
     ], 2, 2),
     _(require('@exponent/gl-conformance/node-test/textures_copy-tex-image-and-sub-image-2d')),
@@ -230,7 +230,7 @@ const tests = (() => {
     _(require('@exponent/gl-conformance/node-test/more_conformance_getContext')),
     _(require('@exponent/gl-conformance/node-test/more_conformance_methods')),
     _(require('@exponent/gl-conformance/node-test/more_conformance_webGLArrays'), [
-      // TODO(nikki, sdk12): Figure this out...
+      // TODO(nikki, sdk12): Figure this out
       198, 200, 201,
     ]),
   ])
