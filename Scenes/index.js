@@ -6,6 +6,7 @@ export default {
   REGLBunnyScene: require('./REGLBunnyScene').default,
   REGLLightingScene: require('./REGLLightingScene').default,
   REGLParticlesScene: require('./REGLParticlesScene').default,
+  REGLFeedbackScene: require('./REGLFeedbackScene').default,
   THREEBasicScene: require('./THREEBasicScene').default,
   THREETextureScene: require('./THREETextureScene').default,
   THREEOBJScene: require('./THREEOBJScene').default,
