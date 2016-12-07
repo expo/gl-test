@@ -154,8 +154,7 @@ const tests = (() => {
   ])
 
   // reading
-  // TODO(nikki): This only mostly passes
-  O$([
+  $([
     _(require('@exponent/gl-conformance/node-test/reading_read-pixels-pack-alignment'), [
       // TODO(nikki): Figure out the issue here
       18, 34, 54, 62,
@@ -229,7 +228,7 @@ const tests = (() => {
     _(require('@exponent/gl-conformance/node-test/more_conformance_getContext')),
     _(require('@exponent/gl-conformance/node-test/more_conformance_methods')),
     _(require('@exponent/gl-conformance/node-test/more_conformance_webGLArrays'), [
-      // TODO(nikki, sdk12): Figure this out
+      // TODO(nikki): Figure this out
       198, 200, 201,
     ]),
   ])
