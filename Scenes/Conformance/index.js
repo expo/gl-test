@@ -103,7 +103,7 @@ const tests = (() => {
       7,
     ]),
     _(require('@exponent/gl-conformance/node-test/buffers_element-array-buffer-delete-recreate')),
-  ])
+  ]);
 
   // context
   $([
@@ -112,7 +112,7 @@ const tests = (() => {
       // Extra method `gl.endFrameEXP()` exists
       2, 3,
     ]),
-  ])
+  ]);
 
   // programs
   $([
@@ -151,7 +151,7 @@ const tests = (() => {
       54, 60,
     ]),
     _(require('@exponent/gl-conformance/node-test/programs_use-program-crash-with-discard-in-fragment-shader')),
-  ])
+  ]);
 
   // reading
   $([
@@ -165,7 +165,7 @@ const tests = (() => {
       // These checks require synchronously resizing the canvas which doesn't really work out
       121, 122, 123,
     ], 2, 2),
-  ])
+  ]);
 
   // rendering
   $([
@@ -194,22 +194,25 @@ const tests = (() => {
   ]);
 
   // textures
-  O$([
+  $([
     _(require('@exponent/gl-conformance/node-test/textures_copy-tex-image-2d-formats'), [
       // Don't care about error checking
       42, 46, 50,
     ], 2, 2),
     _(require('@exponent/gl-conformance/node-test/textures_default-texture')),
     _(require('@exponent/gl-conformance/node-test/textures_mipmap-fbo')),
-    _(require('@exponent/gl-conformance/node-test/textures_texture-attachment-formats')),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-attachment-formats'), [], 2, 2),
     _(require('@exponent/gl-conformance/node-test/textures_texture-clear')),
     _(require('@exponent/gl-conformance/node-test/textures_texture-draw-with-2d-and-cube')),
     _(require('@exponent/gl-conformance/node-test/textures_texture-fakeblack')),
-    _(require('@exponent/gl-conformance/node-test/textures_texture-formats-test')),
-    _(require('@exponent/gl-conformance/node-test/textures_texture-mips')),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-formats-test'), [], 2, 2),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-mips'), [
+      // No error checking
+      3, 4,
+    ], 2, 2),
 
     // TODO(nikki): Calls unimplemented methods
-    S_(require('@exponent/gl-conformance/node-test/textures_copy-tex-image-and-sub-image-2d')),
+    S_(require('@exponent/gl-conformance/node-test/textures_copy-tex-image-and-sub-image-2d'), [], 2, 2),
     S_(require('@exponent/gl-conformance/node-test/textures_gl-get-tex-parameter')),
     S_(require('@exponent/gl-conformance/node-test/textures_tex-image-and-sub-image-2d-with-array-buffer-view')),
     S_(require('@exponent/gl-conformance/node-test/textures_tex-sub-image-2d')),
