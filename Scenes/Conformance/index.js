@@ -92,6 +92,7 @@ const tests = (() => {
   ]);
 
   // buffers
+  // passes on iOS and Android!
   $([
     _(require('@exponent/gl-conformance/node-test/buffers_buffer-bind-test'), [
       // No `gl.INVALID_OPERATION` when binding buffer to different target
@@ -106,6 +107,7 @@ const tests = (() => {
   ]);
 
   // context
+  // passes on iOS and Android!
   $([
     _(require('@exponent/gl-conformance/node-test/context_constants-and-properties')),
     _(require('@exponent/gl-conformance/node-test/context_methods'), [
@@ -154,11 +156,13 @@ const tests = (() => {
   ]);
 
   // reading
+  // passes on iOS, some issues on Android
   $([
     _(require('@exponent/gl-conformance/node-test/reading_read-pixels-pack-alignment'), [
       // TODO(nikki): Figure out the issue here
       18, 34, 54, 62,
     ], 32, 32),
+    // Fails many checks on Android here
     _(require('@exponent/gl-conformance/node-test/reading_read-pixels-test'), [
       // No error checking
       114, 115, 116, 117, 118,
@@ -199,10 +203,16 @@ const tests = (() => {
       // Don't care about error checking
       42, 46, 50,
     ], 2, 2),
+    // NOTE: Fails only on out-of-bounds `gl.readPixels(...)`, all in-bounds ones work, ignore?
+    _(require('@exponent/gl-conformance/node-test/textures_copy-tex-image-and-sub-image-2d'), [], 2, 2),
     _(require('@exponent/gl-conformance/node-test/textures_default-texture')),
     _(require('@exponent/gl-conformance/node-test/textures_mipmap-fbo')),
     _(require('@exponent/gl-conformance/node-test/textures_texture-attachment-formats'), [], 2, 2),
     _(require('@exponent/gl-conformance/node-test/textures_texture-clear')),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-copying-feedback-loops'), [
+      // No error checking
+      4, 7,
+    ]),
     _(require('@exponent/gl-conformance/node-test/textures_texture-draw-with-2d-and-cube')),
     _(require('@exponent/gl-conformance/node-test/textures_texture-fakeblack')),
     _(require('@exponent/gl-conformance/node-test/textures_texture-formats-test'), [], 2, 2),
@@ -212,18 +222,21 @@ const tests = (() => {
     ], 2, 2),
 
     // TODO(nikki): Calls unimplemented methods
-    S_(require('@exponent/gl-conformance/node-test/textures_copy-tex-image-and-sub-image-2d'), [], 2, 2),
     S_(require('@exponent/gl-conformance/node-test/textures_gl-get-tex-parameter')),
     S_(require('@exponent/gl-conformance/node-test/textures_tex-image-and-sub-image-2d-with-array-buffer-view')),
     S_(require('@exponent/gl-conformance/node-test/textures_tex-sub-image-2d')),
     S_(require('@exponent/gl-conformance/node-test/textures_texture-sub-image-cube-maps')),
-    S_(require('@exponent/gl-conformance/node-test/textures_texture-copying-feedback-loops')),
     S_(require('@exponent/gl-conformance/node-test/textures_texture-upload-cube-maps')),
 
     // TODO(nikki): Needs 6-argument form
     S_(require('@exponent/gl-conformance/node-test/textures_tex-image-and-uniform-binding-bugs')),
     S_(require('@exponent/gl-conformance/node-test/textures_tex-image-webgl')),
-  ])
+  ]);
+
+  // misc
+  O$([
+    _(require('@exponent/gl-conformance/node-test/misc_instanceof-test')),
+  ]);
 
   // more_conformance
   $([
