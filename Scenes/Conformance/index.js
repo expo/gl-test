@@ -235,6 +235,8 @@ const tests = (() => {
 
   // misc
   O$([
+    _(require('@exponent/gl-conformance/node-test/misc_is-object')),
+    _(require('@exponent/gl-conformance/node-test/misc_functions-returning-strings')),
     _(require('@exponent/gl-conformance/node-test/misc_instanceof-test')),
   ]);
 
