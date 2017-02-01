@@ -234,10 +234,28 @@ const tests = (() => {
   ]);
 
   // misc
-  O$([
+  $([
     _(require('@exponent/gl-conformance/node-test/misc_is-object')),
     _(require('@exponent/gl-conformance/node-test/misc_functions-returning-strings')),
     _(require('@exponent/gl-conformance/node-test/misc_instanceof-test')),
+  ]);
+
+  // uniforms
+  O$([
+    _(require('@exponent/gl-conformance/node-test/uniforms_gl-uniform-bool')),
+    _(require('@exponent/gl-conformance/node-test/uniforms_gl-uniformmatrix4fv'), [
+      1, 3, 6, 8, 11, 13,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/uniforms_uniform-samplers-test'), [
+      // No validation
+      ...Array(39 - 7).fill().map((_, i) => 7 + i),
+    ]),
+    _(require('@exponent/gl-conformance/node-test/uniforms_uniform-values-per-program')),
+
+    // TODO(nikki): Needs `gl.getUniform(...)`
+    S_(require('@exponent/gl-conformance/node-test/uniforms_gl-uniform-arrays')),
+    S_(require('@exponent/gl-conformance/node-test/uniforms_uniform-default-values')),
+    S_(require('@exponent/gl-conformance/node-test/uniforms_uniform-location')),
   ]);
 
   // more_conformance
@@ -302,6 +320,9 @@ const tests = (() => {
   _(require('@exponent/gl-conformance/node-test/buffers_index-validation')),
   _(require('@exponent/gl-conformance/node-test/textures_tex-image-with-invalid-data')),
   _(require('@exponent/gl-conformance/node-test/textures_tex-input-validation')),
+  _(require('@exponent/gl-conformance/node-test/uniforms_gl-unknown-uniform')),
+  _(require('@exponent/gl-conformance/node-test/uniforms_null-uniform-location')),
+  _(require('@exponent/gl-conformance/node-test/uniforms_out-of-bounds-uniform-array-access')),
 ]);
 
 
