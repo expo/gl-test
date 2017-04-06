@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { createTHREEViewClass } from 'exponent';
+import { createTHREEViewClass } from 'expo';
 
 const THREE = require('three');
 const THREEView = createTHREEViewClass(THREE);

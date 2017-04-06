@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { GLView }  from 'exponent';
+import { GLView }  from 'expo';
 
 import REGL from 'regl';
 import mat4 from 'gl-mat4';

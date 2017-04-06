@@ -3,7 +3,7 @@
 import React from 'react';
 import { PanResponder } from 'react-native';
 
-import { createTHREEViewClass } from 'exponent';
+import { createTHREEViewClass } from 'expo';
 
 const THREE = require('three');
 const THREEView = createTHREEViewClass(THREE);

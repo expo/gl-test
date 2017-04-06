@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StackNavigation,
   createRouter,
-} from '@exponent/ex-navigation';
+} from '@expo/ex-navigation';
 import {
   InteractionManager,
   ScrollView,

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { GLView } from 'exponent';
+import { GLView } from 'expo';
 
 
 const vertSrc = `

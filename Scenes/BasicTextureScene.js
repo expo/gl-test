@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Exponent from 'exponent';
+import Expo from 'expo';
 
 
 const vertSrc = `
@@ -36,7 +36,7 @@ export default class BasicScene extends React.Component {
 
   componentDidMount() {
     (async () => {
-      this._textureAsset = Exponent.Asset.fromModule(
+      this._textureAsset = Expo.Asset.fromModule(
         require('../Assets/avatar2.png'));
       await this._textureAsset.downloadAsync();
       this.setState({ ready: true });
@@ -45,12 +45,12 @@ export default class BasicScene extends React.Component {
 
   render() {
     return this.state.ready ? (
-      <Exponent.GLView
+      <Expo.GLView
         style={this.props.style}
         onContextCreate={this._onContextCreate}
       />
     ) : (
-      <Exponent.Components.AppLoading />
+      <Expo.Components.AppLoading />
     );
   }
 

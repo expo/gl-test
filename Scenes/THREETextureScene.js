@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import Exponent from 'exponent';
+import Expo from 'expo';
 
 const THREE = require('three');
-const THREEView = Exponent.createTHREEViewClass(THREE);
+const THREEView = Expo.createTHREEViewClass(THREE);
 
 
 export default class BasicScene extends React.Component {
@@ -32,7 +32,7 @@ export default class BasicScene extends React.Component {
 
     this.geometry = new THREE.BoxGeometry(200, 200, 200);
 
-    this._textureAsset = Exponent.Asset.fromModule(
+    this._textureAsset = Expo.Asset.fromModule(
       require('../Assets/avatar2.png'));
     await this._textureAsset.downloadAsync();
     this.material = new THREE.MeshBasicMaterial({
@@ -59,7 +59,7 @@ export default class BasicScene extends React.Component {
         tick={this.tick}
       />
     ) : (
-      <Exponent.Components.AppLoading />
+      <Expo.Components.AppLoading />
     );
   }
 }

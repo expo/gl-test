@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-import Exponent from 'exponent';
+import Expo from 'expo';
 
 const THREE = require('three');
 global.THREE = THREE;
 require('three/examples/js/loaders/OBJLoader');
-const THREEView = Exponent.createTHREEViewClass(THREE);
+const THREEView = Expo.createTHREEViewClass(THREE);
 
 if (!console.time) {
   console.time = () => {};
@@ -51,11 +51,11 @@ export default class BasicScene extends React.Component {
     const loader = new THREE.OBJLoader();
     this.model = await new Promise((resolve, reject) =>
       loader.load(
-        Exponent.Asset.fromModule(require('../Assets/model.obj')).uri,
+        Expo.Asset.fromModule(require('../Assets/model.obj')).uri,
         resolve,
         () => {},
         reject));
-    const textureAsset = Exponent.Asset.fromModule(
+    const textureAsset = Expo.Asset.fromModule(
       require('../Assets/UV_Grid_Sm.png'));
     await textureAsset.downloadAsync();
     const texture = THREEView.textureFromAsset(textureAsset);
@@ -86,7 +86,7 @@ export default class BasicScene extends React.Component {
         tick={this.tick}
       />
     ) : (
-      <Exponent.Components.AppLoading />
+      <Expo.Components.AppLoading />
     );
   }
 }
