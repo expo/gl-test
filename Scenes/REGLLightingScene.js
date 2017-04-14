@@ -9,9 +9,7 @@ import model from 'bunny';
 import mat4 from 'gl-mat4';
 import normals from 'angle-normals';
 
-
 const DIST = 50;
-
 
 export default class BasicScene extends React.Component {
   static meta = {
@@ -27,7 +25,7 @@ export default class BasicScene extends React.Component {
     );
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     const regl = REGL({ gl });
 
     const drawModel = regl({
@@ -65,23 +63,26 @@ export default class BasicScene extends React.Component {
       },
       elements: model.cells,
       uniforms: {
-        view: ({ time: t }) => mat4.lookAt(
-          [],
-          [DIST * Math.cos(t), 2.5, DIST * Math.sin(t)],
-          [0, 2.5, 0],
-          [0, 1, 0]),
+        view: ({ time: t }) =>
+          mat4.lookAt(
+            [],
+            [DIST * Math.cos(t), 2.5, DIST * Math.sin(t)],
+            [0, 2.5, 0],
+            [0, 1, 0]
+          ),
         projection: mat4.perspective(
           [],
           Math.PI / 4,
           gl.drawingBufferWidth / gl.drawingBufferHeight,
           0.01,
-          1000),
+          1000
+        ),
         'lights[0].color': [1, 0, 0],
         'lights[1].color': [0, 1, 0],
         'lights[2].color': [0, 0, 1],
         'lights[3].color': [1, 1, 0],
         'lights[0].position': ({ time: t }) => [
-          10 * Math.cos(0.09 * (t)),
+          10 * Math.cos(0.09 * t),
           10 * Math.sin(0.09 * (2 * t)),
           10 * Math.cos(0.09 * (3 * t)),
         ],
@@ -117,5 +118,5 @@ export default class BasicScene extends React.Component {
       requestAnimationFrame(frame);
     };
     frame();
-  }
+  };
 }

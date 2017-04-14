@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { View }  from 'react-native';
+import { View } from 'react-native';
 import { GLView } from 'expo';
 
 class GLRunTest extends React.Component {
@@ -9,16 +9,13 @@ class GLRunTest extends React.Component {
     // eslint-disable-next-line no-unused-vars
     const { testCase, testName, onDone, ...viewProps } = this.props;
     return (
-      <View {...viewProps} >
-        <GLView
-          style={{ flex: 1 }}
-          onContextCreate={this._onContextCreate}
-        />
+      <View {...viewProps}>
+        <GLView style={{ flex: 1 }} onContextCreate={this._onContextCreate} />
       </View>
     );
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     // gl.enableLogging = true;
 
     const { testCase, testName, onDone } = this.props;
@@ -82,7 +79,7 @@ class GLRunTest extends React.Component {
         return gl;
       },
     });
-  }
+  };
 }
 
 export default GLRunTest;

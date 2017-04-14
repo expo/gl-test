@@ -4,7 +4,6 @@ import React from 'react';
 
 import Expo from 'expo';
 
-
 const vertSrc = `
   precision highp float;
   attribute vec2 position;
@@ -37,24 +36,23 @@ export default class BasicScene extends React.Component {
   componentDidMount() {
     (async () => {
       this._textureAsset = Expo.Asset.fromModule(
-        require('../Assets/avatar2.png'));
+        require('../Assets/avatar2.png')
+      );
       await this._textureAsset.downloadAsync();
       this.setState({ ready: true });
     })();
   }
 
   render() {
-    return this.state.ready ? (
-      <Expo.GLView
-        style={this.props.style}
-        onContextCreate={this._onContextCreate}
-      />
-    ) : (
-      <Expo.Components.AppLoading />
-    );
+    return this.state.ready
+      ? <Expo.GLView
+          style={this.props.style}
+          onContextCreate={this._onContextCreate}
+        />
+      : <Expo.Components.AppLoading />;
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     gl.enableLogging = true;
 
     // Compile vertex and fragment shader
@@ -82,13 +80,20 @@ export default class BasicScene extends React.Component {
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA,
-                  128, 128, 0,
-                  gl.RGBA, gl.UNSIGNED_BYTE,
-                  this._textureAsset);
-                  // 1, 1, 0,
-                  // gl.RGBA, gl.UNSIGNED_BYTE,
-                  // new Uint8Array([255, 0, 0, 255]));
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      128,
+      128,
+      0,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      this._textureAsset
+    );
+    // 1, 1, 0,
+    // gl.RGBA, gl.UNSIGNED_BYTE,
+    // new Uint8Array([255, 0, 0, 255]));
     gl.uniform1i(gl.getUniformLocation(program, 'texture'), 0);
 
     /// Animate!
@@ -114,9 +119,7 @@ export default class BasicScene extends React.Component {
         gl.vertexAttribPointer(positionAttrib, 2, gl.FLOAT, false, 0, 0);
 
         // Buffer data and draw!
-        const verts = new Float32Array([
-          -2, 0, 0, -2, 2, 2,
-        ]);
+        const verts = new Float32Array([-2, 0, 0, -2, 2, 2]);
         gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
         gl.drawArrays(gl.TRIANGLES, 0, verts.length / 2);
 
@@ -130,5 +133,5 @@ export default class BasicScene extends React.Component {
       }
     };
     animate();
-  }
+  };
 }

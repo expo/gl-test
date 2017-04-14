@@ -7,7 +7,6 @@ import { createTHREEViewClass } from 'expo';
 const THREE = require('three');
 const THREEView = createTHREEViewClass(THREE);
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'THREE Basic Scene',
@@ -28,10 +27,10 @@ export default class BasicScene extends React.Component {
     this.scene.add(this.mesh);
   }
 
-  tick = (dt) => {
+  tick = dt => {
     this.mesh.rotation.x += 1 * dt;
     this.mesh.rotation.y += 2 * dt;
-  }
+  };
 
   render() {
     return (

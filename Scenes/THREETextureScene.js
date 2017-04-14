@@ -7,7 +7,6 @@ import Expo from 'expo';
 const THREE = require('three');
 const THREEView = Expo.createTHREEViewClass(THREE);
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'THREE Texture Scene',
@@ -33,7 +32,8 @@ export default class BasicScene extends React.Component {
     this.geometry = new THREE.BoxGeometry(200, 200, 200);
 
     this._textureAsset = Expo.Asset.fromModule(
-      require('../Assets/avatar2.png'));
+      require('../Assets/avatar2.png')
+    );
     await this._textureAsset.downloadAsync();
     this.material = new THREE.MeshBasicMaterial({
       map: THREEView.textureFromAsset(this._textureAsset),
@@ -43,23 +43,21 @@ export default class BasicScene extends React.Component {
     this.scene.add(this.mesh);
 
     this.setState({ ready: true });
- }
-
-  tick = (dt) => {
-    this.mesh.rotation.x += 1 * dt;
-    this.mesh.rotation.y += 2 * dt;
   }
 
+  tick = dt => {
+    this.mesh.rotation.x += 1 * dt;
+    this.mesh.rotation.y += 2 * dt;
+  };
+
   render() {
-    return this.state.ready ? (
-      <THREEView
-        style={this.props.style}
-        scene={this.scene}
-        camera={this.camera}
-        tick={this.tick}
-      />
-    ) : (
-      <Expo.Components.AppLoading />
-    );
+    return this.state.ready
+      ? <THREEView
+          style={this.props.style}
+          scene={this.scene}
+          camera={this.camera}
+          tick={this.tick}
+        />
+      : <Expo.Components.AppLoading />;
   }
 }

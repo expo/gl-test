@@ -2,16 +2,14 @@
 
 import React from 'react';
 
-import { GLView }  from 'expo';
+import { GLView } from 'expo';
 
 import REGL from 'regl';
 import mat4 from 'gl-mat4';
 import hsv2rgb from 'hsv2rgb';
 
-
 const NUM_POINTS = 1e4;
 const VERT_SIZE = 4 * (4 + 4 + 3);
-
 
 export default class BasicScene extends React.Component {
   static meta = {
@@ -27,7 +25,7 @@ export default class BasicScene extends React.Component {
     );
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     const regl = REGL({ gl });
 
     const pointBuffer = regl.buffer(
@@ -45,9 +43,12 @@ export default class BasicScene extends React.Component {
           2.0 * Math.PI * Math.random(),
           2.0 * Math.PI * Math.random(),
           // color
-          color[0] / 255, color[1] / 255, color[2] / 255,
+          color[0] / 255,
+          color[1] / 255,
+          color[2] / 255,
         ];
-      }));
+      })
+    );
 
     const drawParticles = regl({
       vert: `
@@ -99,14 +100,16 @@ export default class BasicScene extends React.Component {
             [],
             [30 * Math.cos(t), 2.5, 30 * Math.sin(t)],
             [0, 0, 0],
-            [0, 1, 0]);
+            [0, 1, 0]
+          );
         },
         projection: mat4.perspective(
           [],
           Math.PI / 4,
           gl.drawingBufferWidth / gl.drawingBufferHeight,
           0.01,
-          1000),
+          1000
+        ),
         time: ({ time }) => time * 0.1,
       },
 
@@ -129,5 +132,5 @@ export default class BasicScene extends React.Component {
       requestAnimationFrame(frame);
     };
     frame();
-  }
+  };
 }

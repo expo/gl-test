@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  StackNavigation,
-  createRouter,
-} from '@expo/ex-navigation';
+import { StackNavigation, createRouter } from '@expo/ex-navigation';
 import {
   InteractionManager,
   ScrollView,
@@ -22,17 +19,17 @@ class SceneScreen extends React.Component {
         return params.title || params.component.meta.description;
       },
       translucent: true,
-      tintColor: "#000",
+      tintColor: '#000',
     },
   };
 
   state = {
     transitionComplete: false,
-  }
+  };
 
   componentWillMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.setState({transitionComplete: true});
+      this.setState({ transitionComplete: true });
     });
   }
 
@@ -46,11 +43,12 @@ class SceneScreen extends React.Component {
     }
 
     return (
-      <View style={{
-        ...this.props.route.getContentInsetsStyle(),
-        flex: 1,
-        backgroundColor: 'black',
-      }}>
+      <View
+        style={{
+          ...this.props.route.getContentInsetsStyle(),
+          flex: 1,
+          backgroundColor: 'black',
+        }}>
         <SceneComponent style={{ flex: 1 }} />
         <StatusBar barStyle="default" />
       </View>
@@ -69,7 +67,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ScrollView
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         contentContainerStyle={this.props.route.getContentContainerStyle()}>
         {Object.values(Scenes).map(this._renderSceneOption)}
         <StatusBar barStyle="default" />
@@ -84,24 +82,28 @@ class HomeScreen extends React.Component {
         style={styles.row}
         underlayColor="#eee"
         onPress={() => this._navigateToScene(SceneComponent)}>
-        <Text>{SceneComponent.meta.description || 'Scene missing description'}</Text>
+        <Text>
+          {SceneComponent.meta.description || 'Scene missing description'}
+        </Text>
       </TouchableHighlight>
     );
-  }
+  };
 
-  _navigateToScene = (SceneComponent) => {
+  _navigateToScene = SceneComponent => {
     this.props.navigator.push('scene', {
       title: SceneComponent.meta.description,
       component: SceneComponent,
     });
-  }
+  };
 }
 
-export const Router = createRouter(() => ({
-  home: () => HomeScreen,
-  scene: () => SceneScreen,
-}), {ignoreSerializableWarnings: true});
-
+export const Router = createRouter(
+  () => ({
+    home: () => HomeScreen,
+    scene: () => SceneScreen,
+  }),
+  { ignoreSerializableWarnings: true }
+);
 
 const styles = StyleSheet.create({
   row: {

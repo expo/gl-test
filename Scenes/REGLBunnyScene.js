@@ -11,11 +11,9 @@ import normals from 'angle-normals';
 import bunny from 'bunny';
 import teapot from 'teapot';
 
-
 const DIST = 400;
 const NUM_MODELS = 240;
 const REGION_SIZE = 80;
-
 
 const symRand = () => 2 * Math.random() - 1;
 
@@ -35,7 +33,6 @@ const teapotOffsets = Array(NUM_MODELS).fill().map(() => ({
   ],
 }));
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'REGL Bunny Scene',
@@ -50,11 +47,12 @@ export default class BasicScene extends React.Component {
     );
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     const regl = REGL({ gl });
 
-    const makeModelCommand = (model) => regl({
-      vert: `
+    const makeModelCommand = model =>
+      regl({
+        vert: `
   precision highp float;
   attribute vec3 position, normal;
   uniform mat4 model, view, projection;
@@ -65,7 +63,7 @@ export default class BasicScene extends React.Component {
     fragPosition = position + offset;
     gl_Position = projection * view * model * vec4(position + offset, 1);
   }`,
-      frag: `
+        frag: `
   precision highp float;
   struct Light {
     vec3 color;
@@ -83,53 +81,55 @@ export default class BasicScene extends React.Component {
     }
     gl_FragColor = vec4(light, 1);
   }`,
-      attributes: {
-        position: model.positions,
-        normal: normals(model.cells, model.positions),
-      },
-      elements: model.cells,
-      uniforms: {
-        offset: regl.prop('offset'),
-        model: mat4.identity([]),
-        view: ({ time: t }) => {
-          return mat4.lookAt(
-            [],
-            [DIST * Math.cos(t), 2.5, DIST * Math.sin(t)],
-            [0, 2.5, 0],
-            [0, 1, 0]);
+        attributes: {
+          position: model.positions,
+          normal: normals(model.cells, model.positions),
         },
-        projection: mat4.perspective(
-          [],
-          Math.PI / 4,
-          gl.drawingBufferWidth / gl.drawingBufferHeight,
-          0.01,
-          1000),
-        'lights[0].color': [1, 0, 0],
-        'lights[1].color': [0, 1, 0],
-        'lights[2].color': [0, 0, 1],
-        'lights[3].color': [1, 1, 0],
-        'lights[0].position': ({ time: t }) => [
-          10 * Math.cos(0.09 * (t)),
-          10 * Math.sin(0.09 * (2 * t)),
-          10 * Math.cos(0.09 * (3 * t)),
-        ],
-        'lights[1].position': ({ time: t }) => [
-          10 * Math.cos(0.05 * (5 * t + 1)),
-          10 * Math.sin(0.05 * (4 * t)),
-          10 * Math.cos(0.05 * (0.1 * t)),
-        ],
-        'lights[2].position': ({ time: t }) => [
-          10 * Math.cos(0.05 * (9 * t)),
-          10 * Math.sin(0.05 * (0.25 * t)),
-          10 * Math.cos(0.05 * (4 * t)),
-        ],
-        'lights[3].position': ({ time: t }) => [
-          10 * Math.cos(0.1 * (0.3 * t)),
-          10 * Math.sin(0.1 * (2.1 * t)),
-          10 * Math.cos(0.1 * (1.3 * t)),
-        ],
-      },
-    });
+        elements: model.cells,
+        uniforms: {
+          offset: regl.prop('offset'),
+          model: mat4.identity([]),
+          view: ({ time: t }) => {
+            return mat4.lookAt(
+              [],
+              [DIST * Math.cos(t), 2.5, DIST * Math.sin(t)],
+              [0, 2.5, 0],
+              [0, 1, 0]
+            );
+          },
+          projection: mat4.perspective(
+            [],
+            Math.PI / 4,
+            gl.drawingBufferWidth / gl.drawingBufferHeight,
+            0.01,
+            1000
+          ),
+          'lights[0].color': [1, 0, 0],
+          'lights[1].color': [0, 1, 0],
+          'lights[2].color': [0, 0, 1],
+          'lights[3].color': [1, 1, 0],
+          'lights[0].position': ({ time: t }) => [
+            10 * Math.cos(0.09 * t),
+            10 * Math.sin(0.09 * (2 * t)),
+            10 * Math.cos(0.09 * (3 * t)),
+          ],
+          'lights[1].position': ({ time: t }) => [
+            10 * Math.cos(0.05 * (5 * t + 1)),
+            10 * Math.sin(0.05 * (4 * t)),
+            10 * Math.cos(0.05 * (0.1 * t)),
+          ],
+          'lights[2].position': ({ time: t }) => [
+            10 * Math.cos(0.05 * (9 * t)),
+            10 * Math.sin(0.05 * (0.25 * t)),
+            10 * Math.cos(0.05 * (4 * t)),
+          ],
+          'lights[3].position': ({ time: t }) => [
+            10 * Math.cos(0.1 * (0.3 * t)),
+            10 * Math.sin(0.1 * (2.1 * t)),
+            10 * Math.cos(0.1 * (1.3 * t)),
+          ],
+        },
+      });
 
     const drawBunny = makeModelCommand(bunny);
     const drawTeapot = makeModelCommand(teapot);
@@ -149,5 +149,5 @@ export default class BasicScene extends React.Component {
       setTimeout(frame, 33);
     };
     frame();
-  }
+  };
 }

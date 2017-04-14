@@ -16,7 +16,6 @@ if (!console.timeEnd) {
   console.timeEnd = () => {};
 }
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'THREE Object Scene',
@@ -38,10 +37,10 @@ export default class BasicScene extends React.Component {
 
     // lights
     const ambient = new THREE.AmbientLight(0x101030);
-		this.scene.add(ambient);
-		const directionalLight = new THREE.DirectionalLight(0xffeedd);
-		directionalLight.position.set(0, 0, 1);
-		this.scene.add(directionalLight);
+    this.scene.add(ambient);
+    const directionalLight = new THREE.DirectionalLight(0xffeedd);
+    directionalLight.position.set(0, 0, 1);
+    this.scene.add(directionalLight);
 
     // camera
     this.camera = new THREE.PerspectiveCamera(75, 1, 1, 10000);
@@ -54,14 +53,17 @@ export default class BasicScene extends React.Component {
         Expo.Asset.fromModule(require('../Assets/model.obj')).uri,
         resolve,
         () => {},
-        reject));
+        reject
+      )
+    );
     const textureAsset = Expo.Asset.fromModule(
-      require('../Assets/UV_Grid_Sm.png'));
+      require('../Assets/UV_Grid_Sm.png')
+    );
     await textureAsset.downloadAsync();
     const texture = THREEView.textureFromAsset(textureAsset);
     texture.magFilter = THREE.LinearFilter;
     texture.minFilter = THREE.LinearFilter;
-    this.model.traverse((child) => {
+    this.model.traverse(child => {
       if (child instanceof THREE.Mesh) {
         // child.material.color = 0x00ff00;
         child.material.map = texture;
@@ -71,22 +73,20 @@ export default class BasicScene extends React.Component {
     this.scene.add(this.model);
 
     this.setState({ ready: true });
- }
-
-  tick = (dt) => {
-    this.model.rotation.y += 2 * dt;
   }
 
+  tick = dt => {
+    this.model.rotation.y += 2 * dt;
+  };
+
   render() {
-    return this.state.ready ? (
-      <THREEView
-        style={this.props.style}
-        scene={this.scene}
-        camera={this.camera}
-        tick={this.tick}
-      />
-    ) : (
-      <Expo.Components.AppLoading />
-    );
+    return this.state.ready
+      ? <THREEView
+          style={this.props.style}
+          scene={this.scene}
+          camera={this.camera}
+          tick={this.tick}
+        />
+      : <Expo.Components.AppLoading />;
   }
 }

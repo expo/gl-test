@@ -1,12 +1,11 @@
 'use strict';
 
 import React from 'react';
-import { ScrollView, View, Text }  from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 
 import { GLView, Constants } from 'exponent';
 
 import himalaya from 'himalaya';
-
 
 //
 // Khronos has conformance tests available at
@@ -47,10 +46,9 @@ const failWhitelist = [
   /testDrawElementsVBOMulti/,
 ];
 
-
 // Fetch helpers
-const fetchText = async (url) => await (await fetch(url)).text();
-const fetchHTML = async (url) => himalaya.parse(await fetchText(url));
+const fetchText = async url => await (await fetch(url)).text();
+const fetchHTML = async url => himalaya.parse(await fetchText(url));
 
 // Fetch a Khronos conformance test web page and run it in an
 // Exponent.GLView. Provides granular reporting and completion notification
@@ -61,15 +59,12 @@ class ConformanceTest extends React.Component {
     const { url, ...viewProps } = this.props;
     return (
       <View {...viewProps}>
-        <GLView
-          style={{ flex: 1 }}
-          onContextCreate={this._onContextCreate}
-        />
+        <GLView style={{ flex: 1 }} onContextCreate={this._onContextCreate} />
       </View>
     );
   }
 
-  _onContextCreate = async (gl) => {
+  _onContextCreate = async gl => {
     gl.enableLogging = true;
 
     // Some tests rely on gl.canvas being an Object
@@ -82,8 +77,11 @@ class ConformanceTest extends React.Component {
     // Collect script elements
     const scripts = [];
     const scan = ({
-      type, tagName, attributes = {},
-      content, children = [],
+      type,
+      tagName,
+      attributes = {},
+      content,
+      children = [],
     }) => {
       // Inline script?
       if (type === 'Element' && tagName === 'script' && content !== undefined) {
@@ -111,7 +109,7 @@ class ConformanceTest extends React.Component {
     };
 
     // Dumb polyfill for HTMLElement
-    polyfills.HTMLElement = class { };
+    polyfills.HTMLElement = class {};
 
     // Polyfill for global.document
     const filename = url.replace(/.*\//, '');
@@ -128,7 +126,7 @@ class ConformanceTest extends React.Component {
       createElement: () => createElement(),
       createTextNode: () => createElement(),
 
-      getElementById: (id) => {
+      getElementById: id => {
         // 'description's children describe the test, this is useful info
         if (id === 'description') {
           return {
@@ -140,7 +138,7 @@ class ConformanceTest extends React.Component {
         }
 
         // Is it a script?
-        const script = scripts.find((script) => script.id === id);
+        const script = scripts.find(script => script.id === id);
         if (script) {
           return {
             type: script.type,
@@ -155,10 +153,11 @@ class ConformanceTest extends React.Component {
         return createElement();
       },
 
-      getElementsByTagName: (tagName) => {
+      getElementsByTagName: tagName => {
         if (tagName !== 'script') {
           throw new Error(
-            `getElementsByTagName(...) polyfill'd only for <script> tags`);
+            `getElementsByTagName(...) polyfill'd only for <script> tags`
+          );
         }
         return scripts.map(({ src = '' }) => ({ src }));
       },
@@ -182,7 +181,7 @@ class ConformanceTest extends React.Component {
           reportResults: (_, success, msg, skipped) => {
             // Check if failing is actually ok due to non-conformance
             let nonConformant = false;
-            if (!success && failWhitelist.find((r) => msg.match(r))) {
+            if (!success && failWhitelist.find(r => msg.match(r))) {
               success = true;
               nonConformant = true;
             }
@@ -193,7 +192,8 @@ class ConformanceTest extends React.Component {
             const consoleFunc = success ? 'log' : 'warn';
             console[consoleFunc](`${filename}: ${passFail}: ${msg}`);
           },
-          notifyFinished: () => requestAnimationFrame(() => this.props.onDone()),
+          notifyFinished: () =>
+            requestAnimationFrame(() => this.props.onDone()),
         },
       },
 
@@ -207,7 +207,7 @@ class ConformanceTest extends React.Component {
 
     // Collect scripts into a single test-running function.
     let testBody = ``;
-    for (const { type, src, content} of scripts) {
+    for (const { type, src, content } of scripts) {
       if (!type || type.match(/javascript$/)) {
         if (src) {
           const absURL = url.replace(new RegExp('[^/]*$'), src);
@@ -219,19 +219,20 @@ class ConformanceTest extends React.Component {
       }
     }
     const testPreamble = Object.keys(polyfills)
-                               .map((name) => `var ${name} = polyfills.${name};`)
-                               .join('');
+      .map(name => `var ${name} = polyfills.${name};`)
+      .join('');
     const testWithPolyfills = new Function(
-      'polyfills', `${testPreamble} ${testBody}`);
+      'polyfills',
+      `${testPreamble} ${testBody}`
+    );
 
     // Run test!
     requestAnimationFrame(() => {
       testWithPolyfills(polyfills);
-      loadListeners.forEach((listener) => listener());
+      loadListeners.forEach(listener => listener());
     });
-  }
+  };
 }
-
 
 // Semi-transparent overlay with test heading, running/done status and
 // granular pass/fail messages for each check. This is for a single test.
@@ -253,50 +254,44 @@ class ConformanceTestResult extends React.Component {
     return (
       <View
         style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            padding: 20,
-          }}>
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          padding: 20,
+        }}>
         <Text style={{ color: 'white', fontSize: 24, marginBottom: 5 }}>
           {filename}
         </Text>
 
-        {
-          this.state.expanded ? (
-            <Text
+        {this.state.expanded
+          ? <Text
               style={{
-                  color: done ? 'white' : 'blue',
-                  fontSize: 20,
-                  marginBottom: 5,
-                }}>
+                color: done ? 'white' : 'blue',
+                fontSize: 20,
+                marginBottom: 5,
+              }}>
               {done ? 'DONE' : 'RUNNING...'}
             </Text>
-          ) : null
-        }
+          : null}
 
-        {
-          this.state.expanded ? results.map(
-            ({ success, msg, skipped, nonConformant }, i) => (
-              <View
-                key={i}
-                style={{ flexDirection: 'row' }}>
+        {this.state.expanded
+          ? results.map(({ success, msg, skipped, nonConformant }, i) => (
+              <View key={i} style={{ flexDirection: 'row' }}>
                 <Text
                   style={{
-                      flex: 0.2,
-                      color: success ? nonConformant ? 'blue' : 'green' : 'red',
-                    }}>
+                    flex: 0.2,
+                    color: success ? nonConformant ? 'blue' : 'green' : 'red',
+                  }}>
                   {success ? 'PASS' : 'FAIL'}
                 </Text>
                 <Text style={{ flex: 1, color: '#aaa' }}>
                   {msg}
                 </Text>
               </View>
-            )) : null
-        }
+            ))
+          : null}
       </View>
     );
   }
 }
-
 
 // Run a sequence of Khronos conformance tests given their URLs and
 // summarize the results.
@@ -336,7 +331,6 @@ class ConformanceTestSuite extends React.Component {
     }));
   }
 
-
   render() {
     // eslint-disable-next-line no-unused-vars
     const { urls, ...viewProps } = this.props;
@@ -344,7 +338,8 @@ class ConformanceTestSuite extends React.Component {
     return (
       <View {...viewProps}>
         {this._renderConformanceTest(current, () =>
-          this._startTest(current + 1))}
+          this._startTest(current + 1)
+        )}
         {this._renderResults()}
       </View>
     );
@@ -352,12 +347,13 @@ class ConformanceTestSuite extends React.Component {
 
   _renderConformanceTest(index, onDone) {
     const { urls } = this.props;
-    if (index >= urls.length) { // All done?
-      return <View style={{ flex: 1, backgroundColor: 'black'}} />;
+    if (index >= urls.length) {
+      // All done?
+      return <View style={{ flex: 1, backgroundColor: 'black' }} />;
     }
     const url = urls[index];
 
-    const updateCurrentResult = (update) =>
+    const updateCurrentResult = update =>
       this.setState(({ results }) => ({
         results: {
           ...results,
@@ -374,11 +370,13 @@ class ConformanceTestSuite extends React.Component {
         key={index}
         url={url}
         onDone={() => {
-            updateCurrentResult(() => ({ done: true }));
-            onDone();
-          }}
-        onReport={(report) => updateCurrentResult(
-            ({ reports }) => ({ reports: [...reports, report] }))}
+          updateCurrentResult(() => ({ done: true }));
+          onDone();
+        }}
+        onReport={report =>
+          updateCurrentResult(({ reports }) => ({
+            reports: [...reports, report],
+          }))}
       />
     );
   }
@@ -390,52 +388,52 @@ class ConformanceTestSuite extends React.Component {
     return (
       <View
         style={{
-            backgroundColor: 'transparent',
-            position: 'absolute',
-            left: 0, top: 0, right: 0, bottom: 0,
-          }}>
+          backgroundColor: 'transparent',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          right: 0,
+          bottom: 0,
+        }}>
         <View
           style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.9)',
-              height: Constants.statusBarHeight,
-            }}
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            height: Constants.statusBarHeight,
+          }}
         />
         <ScrollView style={{ backgroundColor: 'transparent' }}>
-          {
-            urls.filter((url) => results[url]).map((url, i) => {
-              const filename = url.replace(/.*\//, '');
-              const { reports, done } = results[url];
-              return (
-                <ConformanceTestResult
-                  key={i}
-                  filename={filename}
-                  results={reports}
-                  done={done}
-                />
-              );
-            })
-          }
+          {urls.filter(url => results[url]).map((url, i) => {
+            const filename = url.replace(/.*\//, '');
+            const { reports, done } = results[url];
+            return (
+              <ConformanceTestResult
+                key={i}
+                filename={filename}
+                results={reports}
+                done={done}
+              />
+            );
+          })}
         </ScrollView>
       </View>
     );
   }
 }
 
-
 // Main component. Display a conformance test suite with listed URLs.
 const TESTS_URL = 'https://www.khronos.org/registry/webgl/sdk/tests';
 // const TESTS_URL = 'http://192.168.1.74:8000';
-export default ((paths) => () => {
-  paths = paths.filter((path) => !path.match(/^S/));
-  const only = paths.filter((path) => path.match(/^O/));
+export default (paths => () => {
+  paths = paths.filter(path => !path.match(/^S/));
+  const only = paths.filter(path => path.match(/^O/));
   if (only.length > 0) {
-    paths = only.map((path) => path.substr(1));
+    paths = only.map(path => path.substr(1));
   }
 
   return (
     <ConformanceTestSuite
       style={{ flex: 1 }}
-      urls={paths.map((path) => `${TESTS_URL}/${path}`)}
+      urls={paths.map(path => `${TESTS_URL}/${path}`)}
     />
   );
 })([
@@ -490,9 +488,7 @@ export default ((paths) => () => {
   // 'conformance/more/functions/vertexAttribBadArgs.html',
   // 'conformance/more/functions/vertexAttribPointerBadArgs.html',
 
-
   //// main
 
   'conformance/buffers/buffer-bind-test.html',
 ]);
-

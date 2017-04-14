@@ -6,7 +6,6 @@ import { GLView } from 'expo';
 
 import REGL from 'regl';
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'REGL Feedback Scene',
@@ -21,10 +20,10 @@ export default class BasicScene extends React.Component {
     );
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     const regl = REGL({ gl });
 
-    const pixels = regl.texture()
+    const pixels = regl.texture();
 
     const drawFeedback = regl({
       frag: `
@@ -60,7 +59,7 @@ export default class BasicScene extends React.Component {
       uniforms: {
         texture: pixels,
         mouse: [100, 100],
-        t: ({tick}) => 0.01 * tick,
+        t: ({ tick }) => 0.01 * tick,
       },
 
       count: 3,
@@ -81,5 +80,5 @@ export default class BasicScene extends React.Component {
       requestAnimationFrame(frame);
     };
     frame();
-  }
+  };
 }

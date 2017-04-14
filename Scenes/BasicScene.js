@@ -4,7 +4,6 @@ import React from 'react';
 
 import { GLView } from 'expo';
 
-
 const vertSrc = `
 attribute vec2 position;
 varying vec2 uv;
@@ -20,7 +19,6 @@ void main () {
   gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);
 }`;
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'Basic Scene',
@@ -35,7 +33,7 @@ export default class BasicScene extends React.Component {
     );
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     // Compile vertex and fragment shader
     const vert = gl.createShader(gl.VERTEX_SHADER);
     gl.shaderSource(vert, vertSrc);
@@ -78,8 +76,18 @@ export default class BasicScene extends React.Component {
         const speed = this.props.speed || 1;
         const a = 0.48 * Math.sin(0.001 * speed * Date.now()) + 0.5;
         const verts = new Float32Array([
-          -a, -a, a, -a, -a,  a,
-          -a,  a, a, -a,  a,  a,
+          -a,
+          -a,
+          a,
+          -a,
+          -a,
+          a,
+          -a,
+          a,
+          a,
+          -a,
+          a,
+          a,
         ]);
         gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
         gl.drawArrays(gl.TRIANGLES, 0, verts.length / 2);
@@ -94,5 +102,5 @@ export default class BasicScene extends React.Component {
       }
     };
     animate();
-  }
+  };
 }

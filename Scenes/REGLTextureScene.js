@@ -9,7 +9,6 @@ import EXGLView from '../EXGLView';
 
 import REGL from 'regl';
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'REGL Texture Scene',
@@ -25,21 +24,20 @@ export default class BasicScene extends React.Component {
   componentDidMount() {
     (async () => {
       this._textureAsset = Expo.Asset.fromModule(
-        require('../Assets/avatar2.png'));
+        require('../Assets/avatar2.png')
+      );
       await this._textureAsset.downloadAsync();
       this.setState({ ready: true });
     })();
   }
 
   render() {
-    return this.state.ready ? (
-      <EXGLView
-        style={this.props.style}
-        onContextCreate={this._onContextCreate}
-      />
-    ) : (
-      <Expo.Components.AppLoading />
-    );
+    return this.state.ready
+      ? <EXGLView
+          style={this.props.style}
+          onContextCreate={this._onContextCreate}
+        />
+      : <Expo.Components.AppLoading />;
   }
 
   _onContextCreate = (_, gl) => {
@@ -63,11 +61,7 @@ export default class BasicScene extends React.Component {
     gl_Position = vec4(1.0 - 2.0 * position, 0, 1);
   }`,
         attributes: {
-          position: [
-            [-2, 0],
-            [0, -2],
-            [2, 2],
-          ],
+          position: [[-2, 0], [0, -2], [2, 2]],
         },
         uniforms: {
           texture: (() => {
@@ -99,5 +93,5 @@ export default class BasicScene extends React.Component {
     } catch (e) {
       Alert.alert('Error!', e.message);
     }
-  }
+  };
 }

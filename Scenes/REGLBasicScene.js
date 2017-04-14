@@ -6,7 +6,6 @@ import { GLView } from 'expo';
 
 import REGL from 'regl';
 
-
 export default class BasicScene extends React.Component {
   static meta = {
     description: 'REGL Basic Scene',
@@ -21,7 +20,7 @@ export default class BasicScene extends React.Component {
     );
   }
 
-  _onContextCreate = (gl) => {
+  _onContextCreate = gl => {
     const regl = REGL({ gl });
 
     const color = this.props.color || [1, 0, 0];
@@ -39,11 +38,7 @@ export default class BasicScene extends React.Component {
     gl_Position = vec4(position, 0, 1);
   }`,
       attributes: {
-        position: [
-          [-1, 0],
-          [0, -1],
-          [1, 1],
-        ],
+        position: [[-1, 0], [0, -1], [1, 1]],
       },
       count: 3,
     });
@@ -62,5 +57,5 @@ export default class BasicScene extends React.Component {
       requestAnimationFrame(frame);
     };
     frame();
-  }
+  };
 }
