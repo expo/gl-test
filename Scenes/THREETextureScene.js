@@ -58,6 +58,6 @@ export default class BasicScene extends React.Component {
           camera={this.camera}
           tick={this.tick}
         />
-      : <Expo.Components.AppLoading />;
+      : <Expo.AppLoading />;
   }
 }

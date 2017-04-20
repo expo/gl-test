@@ -49,7 +49,7 @@ export default class BasicScene extends React.Component {
           style={this.props.style}
           onContextCreate={this._onContextCreate}
         />
-      : <Expo.Components.AppLoading />;
+      : <Expo.AppLoading />;
   }
 
   _onContextCreate = gl => {
