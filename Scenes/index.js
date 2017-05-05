@@ -1,6 +1,7 @@
 export default {
   BasicScene: require('./BasicScene').default,
   BasicTextureScene: require('./BasicTextureScene').default,
+  BasicCameraStreamScene: require('./BasicCameraStreamScene').default,
   MultiBasicScene: require('./MultiBasicScene').default,
   // REGLTextureScene: require('./REGLTextureScene').default,
   REGLBunnyScene: require('./REGLBunnyScene').default,
