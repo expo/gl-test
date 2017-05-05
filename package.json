@@ -19,7 +19,7 @@
     "himalaya": "^0.2.1",
     "hsv2rgb": "^1.1.0",
     "path": "^0.12.7",
-    "react": "^16.0.0-alpha.6",
+    "react": "16.0.0-alpha.6",
     "react-native": "https://github.com/exponent/react-native#exp-latest",
     "regl": "^1.1.1",
     "teapot": "^1.0.0",
