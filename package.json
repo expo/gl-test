@@ -9,7 +9,7 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "@expo/ex-navigation": "2.9.3",
+    "@expo/ex-navigation": "^2.11.0",
     "@exponent/gl-conformance": "^2.0.8",
     "angle-normals": "^1.0.0",
     "buffer": "^5.0.0",
@@ -20,7 +20,7 @@
     "hsv2rgb": "^1.1.0",
     "path": "^0.12.7",
     "react": "16.0.0-alpha.6",
-    "react-native": "https://github.com/exponent/react-native#exp-latest",
+    "react-native": "https://github.com/exponent/react-native#sdk-17",
     "regl": "^1.1.1",
     "teapot": "^1.0.0",
     "three": "^0.80.1"
