@@ -3,7 +3,7 @@
   "description": "Exponent OpenGL Test",
   "slug": "gl-test",
   "version": "1.0.0",
-  "sdkVersion": "UNVERSIONED",
+  "sdkVersion": "17.0.0",
   "packagerOpts": {
     "assetExts": ["ttf", "mp4", "obj"]
   }
