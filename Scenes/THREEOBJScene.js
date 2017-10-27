@@ -56,9 +56,7 @@ export default class BasicScene extends React.Component {
         reject
       )
     );
-    const textureAsset = Expo.Asset.fromModule(
-      require('../Assets/UV_Grid_Sm.png')
-    );
+    const textureAsset = Expo.Asset.fromModule(require('../Assets/UV_Grid_Sm.png'));
     await textureAsset.downloadAsync();
     const texture = THREEView.textureFromAsset(textureAsset);
     texture.magFilter = THREE.LinearFilter;
@@ -80,13 +78,15 @@ export default class BasicScene extends React.Component {
   };
 
   render() {
-    return this.state.ready
-      ? <THREEView
-          style={this.props.style}
-          scene={this.scene}
-          camera={this.camera}
-          tick={this.tick}
-        />
-      : <Expo.AppLoading />;
+    return this.state.ready ? (
+      <THREEView
+        style={this.props.style}
+        scene={this.scene}
+        camera={this.camera}
+        tick={this.tick}
+      />
+    ) : (
+      <Expo.AppLoading />
+    );
   }
 }

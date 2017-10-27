@@ -35,21 +35,18 @@ export default class BasicScene extends React.Component {
 
   componentDidMount() {
     (async () => {
-      this._textureAsset = Expo.Asset.fromModule(
-        require('../Assets/avatar2.png')
-      );
+      this._textureAsset = Expo.Asset.fromModule(require('../Assets/avatar2.png'));
       await this._textureAsset.downloadAsync();
       this.setState({ ready: true });
     })();
   }
 
   render() {
-    return this.state.ready
-      ? <Expo.GLView
-          style={this.props.style}
-          onContextCreate={this._onContextCreate}
-        />
-      : <Expo.AppLoading />;
+    return this.state.ready ? (
+      <Expo.GLView style={this.props.style} onContextCreate={this._onContextCreate} />
+    ) : (
+      <Expo.AppLoading />
+    );
   }
 
   _onContextCreate = gl => {

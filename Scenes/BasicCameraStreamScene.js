@@ -33,21 +33,14 @@ export default class BasicScene extends React.Component {
   }
 
   render() {
-    return (
-      <Expo.GLView
-        style={this.props.style}
-        onContextCreate={this._onContextCreate}
-      />
-    );
+    return <Expo.GLView style={this.props.style} onContextCreate={this._onContextCreate} />;
   }
 
   _onContextCreate = gl => {
     gl.enableLogging = true;
 
     (async () => {
-      const {
-        exglObjId,
-      } = await NativeModules.ExponentGLObjectManager.createObjectAsync({
+      const { exglObjId } = await NativeModules.ExponentGLObjectManager.createObjectAsync({
         exglCtxId: gl.__exglCtxId,
         texture: {
           camera: {

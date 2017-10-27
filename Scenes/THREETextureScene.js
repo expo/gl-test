@@ -31,9 +31,7 @@ export default class BasicScene extends React.Component {
 
     this.geometry = new THREE.BoxGeometry(200, 200, 200);
 
-    this._textureAsset = Expo.Asset.fromModule(
-      require('../Assets/avatar2.png')
-    );
+    this._textureAsset = Expo.Asset.fromModule(require('../Assets/avatar2.png'));
     await this._textureAsset.downloadAsync();
     this.material = new THREE.MeshBasicMaterial({
       map: THREEView.textureFromAsset(this._textureAsset),
@@ -51,13 +49,15 @@ export default class BasicScene extends React.Component {
   };
 
   render() {
-    return this.state.ready
-      ? <THREEView
-          style={this.props.style}
-          scene={this.scene}
-          camera={this.camera}
-          tick={this.tick}
-        />
-      : <Expo.AppLoading />;
+    return this.state.ready ? (
+      <THREEView
+        style={this.props.style}
+        scene={this.scene}
+        camera={this.camera}
+        tick={this.tick}
+      />
+    ) : (
+      <Expo.AppLoading />
+    );
   }
 }

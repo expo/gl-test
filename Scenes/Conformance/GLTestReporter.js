@@ -46,18 +46,18 @@ class GLTestReporter extends React.Component {
         }}>
         {testLogs.map(
           ({ name, messages, state }, id) =>
-            (id === currentTestId
-              ? <GLRunTest
-                  key={name}
-                  style={{
-                    width: testCases[name].width || 64,
-                    height: testCases[name].height || 64,
-                  }}
-                  testName={name}
-                  testCase={testCases[name]}
-                  onDone={this._onTestFinish}
-                />
-              : null)
+            id === currentTestId ? (
+              <GLRunTest
+                key={name}
+                style={{
+                  width: testCases[name].width || 64,
+                  height: testCases[name].height || 64,
+                }}
+                testName={name}
+                testCase={testCases[name]}
+                onDone={this._onTestFinish}
+              />
+            ) : null
         )}
         <ScrollView
           style={{

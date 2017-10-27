@@ -19,8 +19,9 @@ import GLTestReporter from './GLTestReporter';
 // All forms take an additional array argument with indices of checks that are
 // ok to fail on due to expected non-conformance
 
-const _ = (test, skipChecks, width, height) =>
-  ((test.skipChecks = skipChecks), (test.width = width), (test.height = height), test);
+const _ = (test, skipChecks, width, height) => (
+  (test.skipChecks = skipChecks), (test.width = width), (test.height = height), test
+);
 const S_ = (test, ...args) => ((test.skip = true), _(test, ...args));
 const P_ = (test, pred, ...args) => ((test.skip = !pred), _(test, ...args));
 const O_ = (test, ...args) => ((test.only = true), _(test, ...args));
@@ -42,402 +43,385 @@ const tests = (() => {
   // attribs
   $([
     // TODO(nikki): Fails on Android
-    _(
-      require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-aliasing')
-    ),
+    _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-aliasing')),
     // TODO(nikki): Fails on Android
-    _(
-      require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-matrix')
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/attribs_gl-disabled-vertex-attrib'),
-      [
-        // Needs a fresh context for the last test but we can't create fresh contexts within
-        // a test
-        16,
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/attribs_gl-enable-vertex-attrib'),
-      [
-        // No error check for drawing with attrib without bound buffer
-        2,
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/attribs_gl-matrix-attributes')
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-zero-issues')
-    ),
+    _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-matrix')),
+    _(require('@exponent/gl-conformance/node-test/attribs_gl-disabled-vertex-attrib'), [
+      // Needs a fresh context for the last test but we can't create fresh contexts within
+      // a test
+      16,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/attribs_gl-enable-vertex-attrib'), [
+      // No error check for drawing with attrib without bound buffer
+      2,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/attribs_gl-matrix-attributes')),
+    _(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-zero-issues')),
     _(
       require('@exponent/gl-conformance/node-test/attribs_gl-vertexattribpointer-offsets'),
       [],
       50,
       50
     ),
-    _(
-      require('@exponent/gl-conformance/node-test/attribs_gl-vertexattribpointer'),
-      [
-        // No `gl.getError()` error on bad arguments
-        2,
-        3,
-        4,
-        5,
-        13,
-        27,
-        53,
-        67,
-        93,
-        107,
-        133,
-        147,
-        173,
-        187,
-        213,
-        227,
-        253,
-        267,
-        293,
-        307,
-        327,
-        328,
-        330,
-        333,
-        334,
-        335,
-        336,
-        337,
-        338,
-        339,
-        340,
-        341,
-        342,
-        343,
-        344,
-        345,
-        347,
-        348,
-        350,
-        352,
-        353,
-        354,
-        355,
-        356,
-        357,
-        359,
-        360,
-        362,
-        365,
-        366,
-        368,
-        371,
-        372,
-        373,
-        374,
-        375,
-        376,
-        377,
-        378,
-        379,
-        380,
-        381,
-        382,
-        383,
-        385,
-        386,
-        388,
-        390,
-        391,
-        392,
-        393,
-        394,
-        395,
-        397,
-        398,
-        400,
-        403,
-        404,
-        406,
-        409,
-        410,
-        411,
-        412,
-        413,
-        414,
-        415,
-        416,
-        417,
-        418,
-        419,
-        420,
-        421,
-        423,
-        424,
-        426,
-        428,
-        429,
-        430,
-        431,
-        432,
-        433,
-        435,
-        436,
-        438,
-        441,
-        442,
-        444,
-        447,
-        448,
-        449,
-        450,
-        451,
-        452,
-        453,
-        454,
-        455,
-        456,
-        457,
-        458,
-        459,
-        461,
-        462,
-        464,
-        466,
-        467,
-        468,
-        469,
-        470,
-        471,
-        473,
-        474,
-        476,
-        479,
-        480,
-        482,
-        485,
-        486,
-        487,
-        488,
-        489,
-        490,
-        491,
-        492,
-        493,
-        494,
-        495,
-        496,
-        497,
-        499,
-        500,
-        502,
-        504,
-        505,
-        506,
-        507,
-        508,
-        509,
-        511,
-        512,
-        514,
-        517,
-        518,
-        520,
-        523,
-        524,
-        525,
-        526,
-        527,
-        528,
-        529,
-        530,
-        531,
-        532,
-        533,
-        534,
-        535,
-        537,
-        538,
-        540,
-        542,
-        543,
-        544,
-        545,
-        546,
-        547,
-        549,
-        550,
-        552,
-        555,
-        556,
-        558,
-        561,
-        562,
-        563,
-        564,
-        565,
-        566,
-        567,
-        568,
-        569,
-        570,
-        571,
-        572,
-        573,
-        575,
-        576,
-        578,
-        580,
-        581,
-        582,
-        583,
-        584,
-        585,
-        587,
-        588,
-        590,
-        593,
-        594,
-        596,
-        599,
-        600,
-        601,
-        602,
-        603,
-        604,
-        605,
-        606,
-        607,
-        608,
-        609,
-        610,
-        611,
-        613,
-        614,
-        616,
-        618,
-        619,
-        620,
-        621,
-        622,
-        623,
-        625,
-        626,
-        628,
-        631,
-        632,
-        634,
-        637,
-        638,
-        639,
-        640,
-        641,
-        642,
-        643,
-        644,
-        645,
-        646,
-        647,
-        648,
-        649,
-        651,
-        652,
-        654,
-        656,
-        657,
-        658,
-        659,
-        660,
-        661,
-        663,
-        664,
-        666,
-        669,
-        670,
-        672,
-        675,
-        676,
-        677,
-        678,
-        679,
-        680,
-        681,
-        682,
-        683,
-        684,
-        685,
-        686,
-        687,
-        689,
-        690,
-        692,
-        694,
-        695,
-        696,
-        697,
-        698,
-        699,
-        701,
-        702,
-        704,
-        707,
-        708,
-        710,
-        713,
-        714,
-        715,
-        716,
-        717,
-        718,
-        719,
-        720,
-        721,
-        722,
-        723,
-        724,
-        725,
-        727,
-        728,
-        730,
-        732,
-        733,
-        734,
-        735,
-        736,
-        737,
-        739,
-        740,
-        742,
-        745,
-        746,
-        748,
-        751,
-        752,
-        753,
-        754,
-        755,
-        756,
-        757,
-        758,
-        759,
-        760,
-        761,
-        762,
-        763,
-        765,
-        766,
-        768,
-        770,
-        771,
-        772,
-        773,
-        774,
-        775,
-        777,
-        778,
-        780,
-      ]
-    ),
+    _(require('@exponent/gl-conformance/node-test/attribs_gl-vertexattribpointer'), [
+      // No `gl.getError()` error on bad arguments
+      2,
+      3,
+      4,
+      5,
+      13,
+      27,
+      53,
+      67,
+      93,
+      107,
+      133,
+      147,
+      173,
+      187,
+      213,
+      227,
+      253,
+      267,
+      293,
+      307,
+      327,
+      328,
+      330,
+      333,
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342,
+      343,
+      344,
+      345,
+      347,
+      348,
+      350,
+      352,
+      353,
+      354,
+      355,
+      356,
+      357,
+      359,
+      360,
+      362,
+      365,
+      366,
+      368,
+      371,
+      372,
+      373,
+      374,
+      375,
+      376,
+      377,
+      378,
+      379,
+      380,
+      381,
+      382,
+      383,
+      385,
+      386,
+      388,
+      390,
+      391,
+      392,
+      393,
+      394,
+      395,
+      397,
+      398,
+      400,
+      403,
+      404,
+      406,
+      409,
+      410,
+      411,
+      412,
+      413,
+      414,
+      415,
+      416,
+      417,
+      418,
+      419,
+      420,
+      421,
+      423,
+      424,
+      426,
+      428,
+      429,
+      430,
+      431,
+      432,
+      433,
+      435,
+      436,
+      438,
+      441,
+      442,
+      444,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      461,
+      462,
+      464,
+      466,
+      467,
+      468,
+      469,
+      470,
+      471,
+      473,
+      474,
+      476,
+      479,
+      480,
+      482,
+      485,
+      486,
+      487,
+      488,
+      489,
+      490,
+      491,
+      492,
+      493,
+      494,
+      495,
+      496,
+      497,
+      499,
+      500,
+      502,
+      504,
+      505,
+      506,
+      507,
+      508,
+      509,
+      511,
+      512,
+      514,
+      517,
+      518,
+      520,
+      523,
+      524,
+      525,
+      526,
+      527,
+      528,
+      529,
+      530,
+      531,
+      532,
+      533,
+      534,
+      535,
+      537,
+      538,
+      540,
+      542,
+      543,
+      544,
+      545,
+      546,
+      547,
+      549,
+      550,
+      552,
+      555,
+      556,
+      558,
+      561,
+      562,
+      563,
+      564,
+      565,
+      566,
+      567,
+      568,
+      569,
+      570,
+      571,
+      572,
+      573,
+      575,
+      576,
+      578,
+      580,
+      581,
+      582,
+      583,
+      584,
+      585,
+      587,
+      588,
+      590,
+      593,
+      594,
+      596,
+      599,
+      600,
+      601,
+      602,
+      603,
+      604,
+      605,
+      606,
+      607,
+      608,
+      609,
+      610,
+      611,
+      613,
+      614,
+      616,
+      618,
+      619,
+      620,
+      621,
+      622,
+      623,
+      625,
+      626,
+      628,
+      631,
+      632,
+      634,
+      637,
+      638,
+      639,
+      640,
+      641,
+      642,
+      643,
+      644,
+      645,
+      646,
+      647,
+      648,
+      649,
+      651,
+      652,
+      654,
+      656,
+      657,
+      658,
+      659,
+      660,
+      661,
+      663,
+      664,
+      666,
+      669,
+      670,
+      672,
+      675,
+      676,
+      677,
+      678,
+      679,
+      680,
+      681,
+      682,
+      683,
+      684,
+      685,
+      686,
+      687,
+      689,
+      690,
+      692,
+      694,
+      695,
+      696,
+      697,
+      698,
+      699,
+      701,
+      702,
+      704,
+      707,
+      708,
+      710,
+      713,
+      714,
+      715,
+      716,
+      717,
+      718,
+      719,
+      720,
+      721,
+      722,
+      723,
+      724,
+      725,
+      727,
+      728,
+      730,
+      732,
+      733,
+      734,
+      735,
+      736,
+      737,
+      739,
+      740,
+      742,
+      745,
+      746,
+      748,
+      751,
+      752,
+      753,
+      754,
+      755,
+      756,
+      757,
+      758,
+      759,
+      760,
+      761,
+      762,
+      763,
+      765,
+      766,
+      768,
+      770,
+      771,
+      772,
+      773,
+      774,
+      775,
+      777,
+      778,
+      780,
+    ]),
   ]);
 
   // buffers
@@ -448,27 +432,18 @@ const tests = (() => {
       4,
       7,
     ]),
-    _(
-      require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer-delete')
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer'),
-      [
-        // `null` data argument to `gl.bufferData(...)` is ok
-        7,
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/buffers_element-array-buffer-delete-recreate')
-    ),
+    _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer-delete')),
+    _(require('@exponent/gl-conformance/node-test/buffers_buffer-data-array-buffer'), [
+      // `null` data argument to `gl.bufferData(...)` is ok
+      7,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/buffers_element-array-buffer-delete-recreate')),
   ]);
 
   // context
   // passes on iOS and Android!
   $([
-    _(
-      require('@exponent/gl-conformance/node-test/context_constants-and-properties')
-    ),
+    _(require('@exponent/gl-conformance/node-test/context_constants-and-properties')),
     _(require('@exponent/gl-conformance/node-test/context_methods'), [
       // Extra method `gl.endFrameEXP()` exists
       2,
@@ -497,31 +472,20 @@ const tests = (() => {
     _(
       require('@exponent/gl-conformance/node-test/programs_gl-bind-attrib-location-long-names-test')
     ),
-    _(
-      require('@exponent/gl-conformance/node-test/programs_gl-bind-attrib-location-test'),
-      [
-        // Don't pass on Android, maybe OpenGL ES differences... TODO(nikki): Look into this?
-        8,
-        14,
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/programs_gl-get-active-attribute')
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/programs_gl-get-active-uniform'),
-      [
-        // No `gl.getError()` error on bad arguments
-        60,
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/programs_gl-getshadersource'),
-      [
-        // On iOS I get a newline addded at the end of the shader source ¯\_(ツ)_/¯
-        1,
-      ]
-    ),
+    _(require('@exponent/gl-conformance/node-test/programs_gl-bind-attrib-location-test'), [
+      // Don't pass on Android, maybe OpenGL ES differences... TODO(nikki): Look into this?
+      8,
+      14,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/programs_gl-get-active-attribute')),
+    _(require('@exponent/gl-conformance/node-test/programs_gl-get-active-uniform'), [
+      // No `gl.getError()` error on bad arguments
+      60,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/programs_gl-getshadersource'), [
+      // On iOS I get a newline addded at the end of the shader source ¯\_(ツ)_/¯
+      1,
+    ]),
     // TODO(nikki): Fails on Android
     S_(require('@exponent/gl-conformance/node-test/programs_gl-shader-test'), [
       // We can create GEOMETRY shaders ¯\_(ツ)_/¯
@@ -595,54 +559,21 @@ const tests = (() => {
     ]),
     _(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-test')),
     _(require('@exponent/gl-conformance/node-test/rendering_gl-viewport-test')),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_line-loop-tri-fan')
-    ),
+    _(require('@exponent/gl-conformance/node-test/rendering_line-loop-tri-fan')),
     _(require('@exponent/gl-conformance/node-test/rendering_many-draw-calls')),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_more-than-65536-indices'),
-      [],
-      1,
-      1
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_negative-one-index'),
-      [],
-      50,
-      50
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_point-no-attributes'),
-      [],
-      1,
-      1
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_point-size'),
-      [],
-      2,
-      2
-    ),
+    _(require('@exponent/gl-conformance/node-test/rendering_more-than-65536-indices'), [], 1, 1),
+    _(require('@exponent/gl-conformance/node-test/rendering_negative-one-index'), [], 50, 50),
+    _(require('@exponent/gl-conformance/node-test/rendering_point-no-attributes'), [], 1, 1),
+    _(require('@exponent/gl-conformance/node-test/rendering_point-size'), [], 2, 2),
     _(
       require('@exponent/gl-conformance/node-test/rendering_point-with-gl-pointcoord-in-fragment-shader')
     ),
     _(require('@exponent/gl-conformance/node-test/rendering_polygon-offset')),
     _(require('@exponent/gl-conformance/node-test/rendering_simple')),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_triangle'),
-      [],
-      50,
-      50
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_framebuffer-switch')
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_framebuffer-texture-switch')
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/rendering_gl-scissor-fbo-test')
-    ),
+    _(require('@exponent/gl-conformance/node-test/rendering_triangle'), [], 50, 50),
+    _(require('@exponent/gl-conformance/node-test/rendering_framebuffer-switch')),
+    _(require('@exponent/gl-conformance/node-test/rendering_framebuffer-texture-switch')),
+    _(require('@exponent/gl-conformance/node-test/rendering_gl-scissor-fbo-test')),
   ]);
 
   // textures
@@ -667,31 +598,16 @@ const tests = (() => {
     ),
     _(require('@exponent/gl-conformance/node-test/textures_default-texture')),
     _(require('@exponent/gl-conformance/node-test/textures_mipmap-fbo')),
-    _(
-      require('@exponent/gl-conformance/node-test/textures_texture-attachment-formats'),
-      [],
-      2,
-      2
-    ),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-attachment-formats'), [], 2, 2),
     _(require('@exponent/gl-conformance/node-test/textures_texture-clear')),
-    _(
-      require('@exponent/gl-conformance/node-test/textures_texture-copying-feedback-loops'),
-      [
-        // No error checking
-        4,
-        7,
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/textures_texture-draw-with-2d-and-cube')
-    ),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-copying-feedback-loops'), [
+      // No error checking
+      4,
+      7,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-draw-with-2d-and-cube')),
     _(require('@exponent/gl-conformance/node-test/textures_texture-fakeblack')),
-    _(
-      require('@exponent/gl-conformance/node-test/textures_texture-formats-test'),
-      [],
-      2,
-      2
-    ),
+    _(require('@exponent/gl-conformance/node-test/textures_texture-formats-test'), [], 2, 2),
     _(
       require('@exponent/gl-conformance/node-test/textures_texture-mips'),
       [
@@ -704,105 +620,77 @@ const tests = (() => {
     ),
 
     // TODO(nikki): Calls unimplemented methods
-    S_(
-      require('@exponent/gl-conformance/node-test/textures_gl-get-tex-parameter')
-    ),
+    S_(require('@exponent/gl-conformance/node-test/textures_gl-get-tex-parameter')),
     S_(
       require('@exponent/gl-conformance/node-test/textures_tex-image-and-sub-image-2d-with-array-buffer-view')
     ),
     S_(require('@exponent/gl-conformance/node-test/textures_tex-sub-image-2d')),
-    S_(
-      require('@exponent/gl-conformance/node-test/textures_texture-sub-image-cube-maps')
-    ),
-    S_(
-      require('@exponent/gl-conformance/node-test/textures_texture-upload-cube-maps')
-    ),
+    S_(require('@exponent/gl-conformance/node-test/textures_texture-sub-image-cube-maps')),
+    S_(require('@exponent/gl-conformance/node-test/textures_texture-upload-cube-maps')),
 
     // TODO(nikki): Needs 6-argument form
-    S_(
-      require('@exponent/gl-conformance/node-test/textures_tex-image-and-uniform-binding-bugs')
-    ),
+    S_(require('@exponent/gl-conformance/node-test/textures_tex-image-and-uniform-binding-bugs')),
     S_(require('@exponent/gl-conformance/node-test/textures_tex-image-webgl')),
   ]);
 
   // misc
   $([
     _(require('@exponent/gl-conformance/node-test/misc_is-object')),
-    _(
-      require('@exponent/gl-conformance/node-test/misc_functions-returning-strings')
-    ),
+    _(require('@exponent/gl-conformance/node-test/misc_functions-returning-strings')),
     _(require('@exponent/gl-conformance/node-test/misc_instanceof-test')),
   ]);
 
   // uniforms
   O$([
     _(require('@exponent/gl-conformance/node-test/uniforms_gl-uniform-bool')),
-    _(
-      require('@exponent/gl-conformance/node-test/uniforms_gl-uniformmatrix4fv'),
-      [1, 3, 6, 8, 11, 13]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/uniforms_uniform-samplers-test'),
-      [
-        // No validation
-        ...Array(39 - 7).fill().map((_, i) => 7 + i),
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/uniforms_uniform-values-per-program')
-    ),
+    _(require('@exponent/gl-conformance/node-test/uniforms_gl-uniformmatrix4fv'), [
+      1,
+      3,
+      6,
+      8,
+      11,
+      13,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/uniforms_uniform-samplers-test'), [
+      // No validation
+      ...Array(39 - 7)
+        .fill()
+        .map((_, i) => 7 + i),
+    ]),
+    _(require('@exponent/gl-conformance/node-test/uniforms_uniform-values-per-program')),
 
     // TODO(nikki): Needs `gl.getUniform(...)`
-    S_(
-      require('@exponent/gl-conformance/node-test/uniforms_gl-uniform-arrays')
-    ),
-    S_(
-      require('@exponent/gl-conformance/node-test/uniforms_uniform-default-values')
-    ),
+    S_(require('@exponent/gl-conformance/node-test/uniforms_gl-uniform-arrays')),
+    S_(require('@exponent/gl-conformance/node-test/uniforms_uniform-default-values')),
     S_(require('@exponent/gl-conformance/node-test/uniforms_uniform-location')),
   ]);
 
   // more_conformance
   $([
     _(require('@exponent/gl-conformance/node-test/more_conformance_constants')),
-    _(
-      require('@exponent/gl-conformance/node-test/more_conformance_getContext')
-    ),
+    _(require('@exponent/gl-conformance/node-test/more_conformance_getContext')),
     _(require('@exponent/gl-conformance/node-test/more_conformance_methods')),
-    _(
-      require('@exponent/gl-conformance/node-test/more_conformance_webGLArrays'),
-      [
-        // TODO(nikki): Figure this out
-        198,
-        200,
-        201,
-      ]
-    ),
+    _(require('@exponent/gl-conformance/node-test/more_conformance_webGLArrays'), [
+      // TODO(nikki): Figure this out
+      198,
+      200,
+      201,
+    ]),
   ]);
 
   // more_functions
   $([
     _(require('@exponent/gl-conformance/node-test/more_functions_bindBuffer')),
     _(require('@exponent/gl-conformance/node-test/more_functions_bufferData')),
-    _(
-      require('@exponent/gl-conformance/node-test/more_functions_bufferSubData')
-    ),
+    _(require('@exponent/gl-conformance/node-test/more_functions_bufferSubData')),
     _(require('@exponent/gl-conformance/node-test/more_functions_readPixels')),
     _(require('@exponent/gl-conformance/node-test/more_functions_texImage2D')),
-    _(
-      require('@exponent/gl-conformance/node-test/more_functions_uniformMatrix')
-    ),
+    _(require('@exponent/gl-conformance/node-test/more_functions_uniformMatrix')),
     _(require('@exponent/gl-conformance/node-test/more_functions_uniformf')),
-    _(
-      require('@exponent/gl-conformance/node-test/more_functions_uniformfArrayLen1')
-    ),
+    _(require('@exponent/gl-conformance/node-test/more_functions_uniformfArrayLen1')),
     _(require('@exponent/gl-conformance/node-test/more_functions_uniformi')),
-    _(
-      require('@exponent/gl-conformance/node-test/more_functions_vertexAttrib')
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/more_functions_vertexAttribPointer')
-    ),
+    _(require('@exponent/gl-conformance/node-test/more_functions_vertexAttrib')),
+    _(require('@exponent/gl-conformance/node-test/more_functions_vertexAttribPointer')),
     _(require('@exponent/gl-conformance/node-test/more_functions_drawArrays'), [
       // `gl.drawArrays(...)` doesn't throw an error for bad arguments
       14,
@@ -810,19 +698,14 @@ const tests = (() => {
       20,
       21,
     ]),
-    _(
-      require('@exponent/gl-conformance/node-test/more_functions_drawElements'),
-      [
-        // `gl.drawElements(...)` doesn't throw an error for bad arguments
-        14,
-        15,
-        20,
-        21,
-      ]
-    ),
-    _(
-      require('@exponent/gl-conformance/node-test/more_functions_bindFramebufferLeaveNonZero')
-    ),
+    _(require('@exponent/gl-conformance/node-test/more_functions_drawElements'), [
+      // `gl.drawElements(...)` doesn't throw an error for bad arguments
+      14,
+      15,
+      20,
+      21,
+    ]),
+    _(require('@exponent/gl-conformance/node-test/more_functions_bindFramebufferLeaveNonZero')),
   ]);
 
   return filter(only.length > 0 ? only : tests);
@@ -831,9 +714,7 @@ const tests = (() => {
 // Additional tests that currently fail
 [
   // Not sure why this fails
-  _(
-    require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-render')
-  ),
+  _(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib-render')),
 
   // `gl.getVertexAttrib()` not yet implemented
   _(require('@exponent/gl-conformance/node-test/attribs_gl-vertex-attrib')),
@@ -841,43 +722,25 @@ const tests = (() => {
   // Unimplemented functions
   _(require('@exponent/gl-conformance/node-test/more_functions_isTests')),
   _(require('@exponent/gl-conformance/node-test/more_functions_texSubImage2D')),
-  _(
-    require('@exponent/gl-conformance/node-test/more_functions_copyTexImage2D')
-  ),
-  _(
-    require('@exponent/gl-conformance/node-test/more_functions_copyTexSubImage2D')
-  ),
+  _(require('@exponent/gl-conformance/node-test/more_functions_copyTexImage2D')),
+  _(require('@exponent/gl-conformance/node-test/more_functions_copyTexSubImage2D')),
 
   // No validation
-  _(
-    require('@exponent/gl-conformance/node-test/buffers_index-validation-copies-indices')
-  ),
+  _(require('@exponent/gl-conformance/node-test/buffers_index-validation-copies-indices')),
   _(
     require('@exponent/gl-conformance/node-test/buffers_index-validation-crash-with-buffer-sub-data')
   ),
-  _(
-    require('@exponent/gl-conformance/node-test/buffers_index-validation-large-buffer')
-  ),
+  _(require('@exponent/gl-conformance/node-test/buffers_index-validation-large-buffer')),
   _(
     require('@exponent/gl-conformance/node-test/buffers_index-validation-verifies-too-many-indices')
   ),
-  _(
-    require('@exponent/gl-conformance/node-test/buffers_index-validation-with-resized-buffer')
-  ),
+  _(require('@exponent/gl-conformance/node-test/buffers_index-validation-with-resized-buffer')),
   _(require('@exponent/gl-conformance/node-test/buffers_index-validation')),
-  _(
-    require('@exponent/gl-conformance/node-test/textures_tex-image-with-invalid-data')
-  ),
-  _(
-    require('@exponent/gl-conformance/node-test/textures_tex-input-validation')
-  ),
+  _(require('@exponent/gl-conformance/node-test/textures_tex-image-with-invalid-data')),
+  _(require('@exponent/gl-conformance/node-test/textures_tex-input-validation')),
   _(require('@exponent/gl-conformance/node-test/uniforms_gl-unknown-uniform')),
-  _(
-    require('@exponent/gl-conformance/node-test/uniforms_null-uniform-location')
-  ),
-  _(
-    require('@exponent/gl-conformance/node-test/uniforms_out-of-bounds-uniform-array-access')
-  ),
+  _(require('@exponent/gl-conformance/node-test/uniforms_null-uniform-location')),
+  _(require('@exponent/gl-conformance/node-test/uniforms_out-of-bounds-uniform-array-access')),
 ];
 
 export default class Conformance extends React.Component {

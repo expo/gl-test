@@ -17,21 +17,17 @@ const REGION_SIZE = 80;
 
 const symRand = () => 2 * Math.random() - 1;
 
-const bunnyOffsets = Array(NUM_MODELS).fill().map(() => ({
-  offset: [
-    REGION_SIZE * symRand(),
-    REGION_SIZE * Math.random(),
-    REGION_SIZE * symRand(),
-  ],
-}));
+const bunnyOffsets = Array(NUM_MODELS)
+  .fill()
+  .map(() => ({
+    offset: [REGION_SIZE * symRand(), REGION_SIZE * Math.random(), REGION_SIZE * symRand()],
+  }));
 
-const teapotOffsets = Array(NUM_MODELS).fill().map(() => ({
-  offset: [
-    REGION_SIZE * symRand(),
-    -REGION_SIZE * Math.random(),
-    REGION_SIZE * symRand(),
-  ],
-}));
+const teapotOffsets = Array(NUM_MODELS)
+  .fill()
+  .map(() => ({
+    offset: [REGION_SIZE * symRand(), -REGION_SIZE * Math.random(), REGION_SIZE * symRand()],
+  }));
 
 export default class BasicScene extends React.Component {
   static meta = {
@@ -39,12 +35,7 @@ export default class BasicScene extends React.Component {
   };
 
   render() {
-    return (
-      <GLView
-        style={this.props.style}
-        onContextCreate={this._onContextCreate}
-      />
-    );
+    return <GLView style={this.props.style} onContextCreate={this._onContextCreate} />;
   }
 
   _onContextCreate = gl => {

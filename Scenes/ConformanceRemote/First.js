@@ -76,13 +76,7 @@ class ConformanceTest extends React.Component {
 
     // Collect script elements
     const scripts = [];
-    const scan = ({
-      type,
-      tagName,
-      attributes = {},
-      content,
-      children = [],
-    }) => {
+    const scan = ({ type, tagName, attributes = {}, content, children = [] }) => {
       // Inline script?
       if (type === 'Element' && tagName === 'script' && content !== undefined) {
         scripts.push({ content, ...attributes });
@@ -155,9 +149,7 @@ class ConformanceTest extends React.Component {
 
       getElementsByTagName: tagName => {
         if (tagName !== 'script') {
-          throw new Error(
-            `getElementsByTagName(...) polyfill'd only for <script> tags`
-          );
+          throw new Error(`getElementsByTagName(...) polyfill'd only for <script> tags`);
         }
         return scripts.map(({ src = '' }) => ({ src }));
       },
@@ -192,8 +184,7 @@ class ConformanceTest extends React.Component {
             const consoleFunc = success ? 'log' : 'warn';
             console[consoleFunc](`${filename}: ${passFail}: ${msg}`);
           },
-          notifyFinished: () =>
-            requestAnimationFrame(() => this.props.onDone()),
+          notifyFinished: () => requestAnimationFrame(() => this.props.onDone()),
         },
       },
 
@@ -221,10 +212,7 @@ class ConformanceTest extends React.Component {
     const testPreamble = Object.keys(polyfills)
       .map(name => `var ${name} = polyfills.${name};`)
       .join('');
-    const testWithPolyfills = new Function(
-      'polyfills',
-      `${testPreamble} ${testBody}`
-    );
+    const testWithPolyfills = new Function('polyfills', `${testPreamble} ${testBody}`);
 
     // Run test!
     requestAnimationFrame(() => {
@@ -257,20 +245,18 @@ class ConformanceTestResult extends React.Component {
           backgroundColor: 'rgba(0, 0, 0, 0.9)',
           padding: 20,
         }}>
-        <Text style={{ color: 'white', fontSize: 24, marginBottom: 5 }}>
-          {filename}
-        </Text>
+        <Text style={{ color: 'white', fontSize: 24, marginBottom: 5 }}>{filename}</Text>
 
-        {this.state.expanded
-          ? <Text
-              style={{
-                color: done ? 'white' : 'blue',
-                fontSize: 20,
-                marginBottom: 5,
-              }}>
-              {done ? 'DONE' : 'RUNNING...'}
-            </Text>
-          : null}
+        {this.state.expanded ? (
+          <Text
+            style={{
+              color: done ? 'white' : 'blue',
+              fontSize: 20,
+              marginBottom: 5,
+            }}>
+            {done ? 'DONE' : 'RUNNING...'}
+          </Text>
+        ) : null}
 
         {this.state.expanded
           ? results.map(({ success, msg, skipped, nonConformant }, i) => (
@@ -278,13 +264,11 @@ class ConformanceTestResult extends React.Component {
                 <Text
                   style={{
                     flex: 0.2,
-                    color: success ? nonConformant ? 'blue' : 'green' : 'red',
+                    color: success ? (nonConformant ? 'blue' : 'green') : 'red',
                   }}>
                   {success ? 'PASS' : 'FAIL'}
                 </Text>
-                <Text style={{ flex: 1, color: '#aaa' }}>
-                  {msg}
-                </Text>
+                <Text style={{ flex: 1, color: '#aaa' }}>{msg}</Text>
               </View>
             ))
           : null}
@@ -337,9 +321,7 @@ class ConformanceTestSuite extends React.Component {
     const { current } = this.state;
     return (
       <View {...viewProps}>
-        {this._renderConformanceTest(current, () =>
-          this._startTest(current + 1)
-        )}
+        {this._renderConformanceTest(current, () => this._startTest(current + 1))}
         {this._renderResults()}
       </View>
     );
@@ -406,12 +388,7 @@ class ConformanceTestSuite extends React.Component {
             const filename = url.replace(/.*\//, '');
             const { reports, done } = results[url];
             return (
-              <ConformanceTestResult
-                key={i}
-                filename={filename}
-                results={reports}
-                done={done}
-              />
+              <ConformanceTestResult key={i} filename={filename} results={reports} done={done} />
             );
           })}
         </ScrollView>
@@ -431,10 +408,7 @@ export default (paths => () => {
   }
 
   return (
-    <ConformanceTestSuite
-      style={{ flex: 1 }}
-      urls={paths.map(path => `${TESTS_URL}/${path}`)}
-    />
+    <ConformanceTestSuite style={{ flex: 1 }} urls={paths.map(path => `${TESTS_URL}/${path}`)} />
   );
 })([
   // Prefix with 'S' to skip, prefix with 'O' to skip everything else

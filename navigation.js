@@ -82,9 +82,7 @@ class HomeScreen extends React.Component {
         style={styles.row}
         underlayColor="#eee"
         onPress={() => this._navigateToScene(SceneComponent)}>
-        <Text>
-          {SceneComponent.meta.description || 'Scene missing description'}
-        </Text>
+        <Text>{SceneComponent.meta.description || 'Scene missing description'}</Text>
       </TouchableHighlight>
     );
   };

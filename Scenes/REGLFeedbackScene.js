@@ -12,12 +12,7 @@ export default class BasicScene extends React.Component {
   };
 
   render() {
-    return (
-      <GLView
-        style={this.props.style}
-        onContextCreate={this._onContextCreate}
-      />
-    );
+    return <GLView style={this.props.style} onContextCreate={this._onContextCreate} />;
   }
 
   _onContextCreate = gl => {

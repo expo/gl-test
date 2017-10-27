@@ -25,12 +25,7 @@ export default class BasicScene extends React.Component {
   };
 
   render() {
-    return (
-      <GLView
-        style={this.props.style}
-        onContextCreate={this._onContextCreate}
-      />
-    );
+    return <GLView style={this.props.style} onContextCreate={this._onContextCreate} />;
   }
 
   _onContextCreate = gl => {
@@ -75,20 +70,7 @@ export default class BasicScene extends React.Component {
         // Buffer data and draw!
         const speed = this.props.speed || 1;
         const a = 0.48 * Math.sin(0.001 * speed * Date.now()) + 0.5;
-        const verts = new Float32Array([
-          -a,
-          -a,
-          a,
-          -a,
-          -a,
-          a,
-          -a,
-          a,
-          a,
-          -a,
-          a,
-          a,
-        ]);
+        const verts = new Float32Array([-a, -a, a, -a, -a, a, -a, a, a, -a, a, a]);
         gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
         gl.drawArrays(gl.TRIANGLES, 0, verts.length / 2);
 

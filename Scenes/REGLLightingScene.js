@@ -17,12 +17,7 @@ export default class BasicScene extends React.Component {
   };
 
   render() {
-    return (
-      <GLView
-        style={this.props.style}
-        onContextCreate={this._onContextCreate}
-      />
-    );
+    return <GLView style={this.props.style} onContextCreate={this._onContextCreate} />;
   }
 
   _onContextCreate = gl => {
@@ -64,12 +59,7 @@ export default class BasicScene extends React.Component {
       elements: model.cells,
       uniforms: {
         view: ({ time: t }) =>
-          mat4.lookAt(
-            [],
-            [DIST * Math.cos(t), 2.5, DIST * Math.sin(t)],
-            [0, 2.5, 0],
-            [0, 1, 0]
-          ),
+          mat4.lookAt([], [DIST * Math.cos(t), 2.5, DIST * Math.sin(t)], [0, 2.5, 0], [0, 1, 0]),
         projection: mat4.perspective(
           [],
           Math.PI / 4,
