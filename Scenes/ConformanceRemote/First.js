@@ -3,7 +3,8 @@
 import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 
-import { GLView, Constants } from 'exponent';
+import { GLView } from 'expo-gl';
+import Constants from 'expo-constants'
 
 import himalaya from 'himalaya';
 

@@ -22,6 +22,8 @@ import GLTestReporter from './GLTestReporter';
 const _ = (test, skipChecks, width, height) => (
   (test.skipChecks = skipChecks), (test.width = width), (test.height = height), test
 );
+
+const ios_ = (test, ...args) => ((test.skip = Platform !== 'ios'), _(test, ...args));
 const S_ = (test, ...args) => ((test.skip = true), _(test, ...args));
 const P_ = (test, pred, ...args) => ((test.skip = !pred), _(test, ...args));
 const O_ = (test, ...args) => ((test.only = true), _(test, ...args));
@@ -43,9 +45,9 @@ const tests = (() => {
   // attribs
   $([
     // TODO(nikki): Fails on Android
-    _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-aliasing')),
+    ios_(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-aliasing')),
     // TODO(nikki): Fails on Android
-    _(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-matrix')),
+    ios_(require('@exponent/gl-conformance/node-test/attribs_gl-bindAttribLocation-matrix')),
     _(require('@exponent/gl-conformance/node-test/attribs_gl-disabled-vertex-attrib'), [
       // Needs a fresh context for the last test but we can't create fresh contexts within
       // a test
@@ -477,12 +479,12 @@ const tests = (() => {
       8,
       14,
     ]),
-    _(require('@exponent/gl-conformance/node-test/programs_gl-get-active-attribute')),
-    _(require('@exponent/gl-conformance/node-test/programs_gl-get-active-uniform'), [
+    S_(require('@exponent/gl-conformance/node-test/programs_gl-get-active-attribute')),
+    S_(require('@exponent/gl-conformance/node-test/programs_gl-get-active-uniform'), [
       // No `gl.getError()` error on bad arguments
       60,
     ]),
-    _(require('@exponent/gl-conformance/node-test/programs_gl-getshadersource'), [
+    S_(require('@exponent/gl-conformance/node-test/programs_gl-getshadersource'), [
       // On iOS I get a newline addded at the end of the shader source ¯\_(ツ)_/¯
       1,
     ]),
@@ -491,8 +493,8 @@ const tests = (() => {
       // We can create GEOMETRY shaders ¯\_(ツ)_/¯
       2,
     ]),
-    _(require('@exponent/gl-conformance/node-test/programs_invalid-UTF-16')),
-    _(require('@exponent/gl-conformance/node-test/programs_program-test'), [
+    S_(require('@exponent/gl-conformance/node-test/programs_invalid-UTF-16')),
+    S_(require('@exponent/gl-conformance/node-test/programs_program-test'), [
       // No error checking
       4,
       5,
@@ -641,7 +643,7 @@ const tests = (() => {
   ]);
 
   // uniforms
-  O$([
+  $([
     _(require('@exponent/gl-conformance/node-test/uniforms_gl-uniform-bool')),
     _(require('@exponent/gl-conformance/node-test/uniforms_gl-uniformmatrix4fv'), [
       1,
@@ -651,7 +653,7 @@ const tests = (() => {
       11,
       13,
     ]),
-    _(require('@exponent/gl-conformance/node-test/uniforms_uniform-samplers-test'), [
+    S_(require('@exponent/gl-conformance/node-test/uniforms_uniform-samplers-test'), [
       // No validation
       ...Array(39 - 7)
         .fill()

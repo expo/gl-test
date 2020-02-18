@@ -4,7 +4,7 @@ import React from 'react';
 
 import { NativeModules } from 'react-native';
 
-import Expo from 'expo';
+import {GLView} from 'expo-gl';
 
 const vertSrc = `
   precision highp float;
@@ -33,7 +33,7 @@ export default class BasicScene extends React.Component {
   }
 
   render() {
-    return <Expo.GLView style={this.props.style} onContextCreate={this._onContextCreate} />;
+    return <GLView style={this.props.style} onContextCreate={this._onContextCreate} />;
   }
 
   _onContextCreate = gl => {

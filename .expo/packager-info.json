@@ -1,0 +1,9 @@
+{
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 8671,
+  "expoServerNgrokUrl": "https://p9-g3z.wkozyra.gl-test.exp.direct",
+  "packagerNgrokUrl": "https://packager.p9-g3z.wkozyra.gl-test.exp.direct",
+  "ngrokPid": 8808,
+  "devToolsPort": 19002
+}

@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "gl-test",
+    "description": "Exponent OpenGL Test",
+    "slug": "gl-test",
+    "version": "1.0.0",
+    "sdkVersion": "UNVERSIONED",
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4", "obj"]
+    },
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

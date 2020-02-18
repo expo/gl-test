@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { GLView } from 'expo';
+import { GLView } from 'expo-gl';
 
 const vertSrc = `
 attribute vec2 position;

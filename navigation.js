@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigation, createRouter } from '@expo/ex-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import {
   InteractionManager,
   ScrollView,
@@ -45,7 +45,6 @@ class SceneScreen extends React.Component {
     return (
       <View
         style={{
-          ...this.props.route.getContentInsetsStyle(),
           flex: 1,
           backgroundColor: 'black',
         }}>
@@ -68,7 +67,7 @@ class HomeScreen extends React.Component {
     return (
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={this.props.route.getContentContainerStyle()}>
+      >
         {Object.values(Scenes).map(this._renderSceneOption)}
         <StatusBar barStyle="default" />
       </ScrollView>
@@ -88,18 +87,16 @@ class HomeScreen extends React.Component {
   };
 
   _navigateToScene = SceneComponent => {
-    this.props.navigator.push('scene', {
-      title: SceneComponent.meta.description,
-      component: SceneComponent,
-    });
+    this.props.navigation.navigate('conformance');
   };
 }
 
-export const Router = createRouter(
-  () => ({
-    home: () => HomeScreen,
-    scene: () => SceneScreen,
-  }),
+export const Router = createStackNavigator(
+  {
+    home: {screen: HomeScreen},
+    scene: {screen: SceneScreen },
+    conformance: {screen: Scenes.Conformance },
+  },
   { ignoreSerializableWarnings: true }
 );
 

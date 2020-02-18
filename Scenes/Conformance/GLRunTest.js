@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { GLView } from 'expo';
+import { GLView } from 'expo-gl';
 
 class GLRunTest extends React.Component {
   render() {

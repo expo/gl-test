@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import { Constants } from 'expo';
+import Constants from 'expo-constants';
 import GLRunTest from './GLRunTest';
 
 const STATE_COLORS = {

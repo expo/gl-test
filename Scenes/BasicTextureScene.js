@@ -3,6 +3,8 @@
 import React from 'react';
 
 import Expo from 'expo';
+import { Asset } from 'expo-asset';
+import { GLView } from 'expo-gl';
 
 const vertSrc = `
   precision highp float;
@@ -35,7 +37,7 @@ export default class BasicScene extends React.Component {
 
   componentDidMount() {
     (async () => {
-      this._textureAsset = Expo.Asset.fromModule(require('../Assets/avatar2.png'));
+      this._textureAsset = Asset.fromModule(require('../Assets/avatar2.png'));
       await this._textureAsset.downloadAsync();
       this.setState({ ready: true });
     })();
@@ -43,7 +45,7 @@ export default class BasicScene extends React.Component {
 
   render() {
     return this.state.ready ? (
-      <Expo.GLView style={this.props.style} onContextCreate={this._onContextCreate} />
+      <GLView style={this.props.style} onContextCreate={this._onContextCreate} />
     ) : (
       <Expo.AppLoading />
     );
